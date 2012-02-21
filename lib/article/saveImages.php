@@ -1,6 +1,6 @@
 <?php
 
-function saveImages( $context , &$article )
+function saveImages( $context , $article )
 {
 	if( 'com_content' != JRequest::getVar('com_content') );
 	

@@ -1,6 +1,6 @@
 <?php
 
-function inputCode ( &$article , $easyset ) {
+function inputCode ( $article , $easyset ) {
 	
 	// expression to search for
     $regex = '/{(akcode)\s*(.*?)}/i';

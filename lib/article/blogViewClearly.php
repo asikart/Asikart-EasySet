@@ -1,6 +1,6 @@
 <?php
 
-function blogViewClearly( $context, &$article, &$params = null ){
+function blogViewClearly( $context, $article, $params = null ){
 	
 	if( /*JRequest::getVar( 'option' ) != 'com_content' && */ JRequest::getVar( 'layout' ) != 'blog' )
 		return ;

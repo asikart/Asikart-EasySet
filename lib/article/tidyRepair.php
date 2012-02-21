@@ -1,6 +1,6 @@
 <?php
 
-function tidyRepair(&$article , $easyset) {
+function tidyRepair($article , $easyset) {
 	
 	if( 'com_content' != JRequest::getVar('option') ) return ;
 	

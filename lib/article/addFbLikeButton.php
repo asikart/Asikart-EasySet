@@ -1,6 +1,6 @@
 <?php
 
-function addFbLikeButton ($context, &$article) {
+function addFbLikeButton ($context, $article) {
 	$context ;
 	$context = explode( '.' , $context );
 	if( $context[0] != 'com_content' ) return ;

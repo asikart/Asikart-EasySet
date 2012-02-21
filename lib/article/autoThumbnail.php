@@ -1,6 +1,6 @@
 <?php
 
-function autoThumbnail( $context, &$article, &$params ){
+function autoThumbnail( $context, $article, $params = null ){
 	
 	JHtml::_('behavior.modal');
 	

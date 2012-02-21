@@ -1,6 +1,6 @@
 <?php
 
-function customCode( $position , $prepareContent = false , &$article = null ) {
+function customCode( $position , $prepareContent = false , $article = null ) {
 	
 	$es = AK::getEasyset() ;
 	
