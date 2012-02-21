@@ -22,4 +22,3 @@ function tidyRepair(&$article , $easyset) {
     endif;
 }
 
-?>

@@ -11,4 +11,3 @@ if($db->updateObject( '#__extensions' , $u , 'element' ))
 else
 	echo '覆蓋失敗' ;
 
-?>

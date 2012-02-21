@@ -732,4 +732,3 @@ function displayError ($errorString = '') {
     die();
     
 }
-?>

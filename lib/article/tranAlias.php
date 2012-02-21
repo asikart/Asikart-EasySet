@@ -72,4 +72,3 @@ function tranAlias (&$article , $easyset) {
     return $article;
 }
 */
-?>

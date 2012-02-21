@@ -94,4 +94,4 @@ class AKDate extends JDate {
   }
 }
 
-?>
+

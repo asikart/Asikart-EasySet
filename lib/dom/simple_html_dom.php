@@ -539,7 +539,7 @@ class simple_html_dom {
         // strip out preformatted tags
         $this->remove_noise("'<\s*(?:code)[^>]*>(.*?)<\s*/\s*(?:code)\s*>'is");
         // strip out server side scripts
-        $this->remove_noise("'(<\?)(.*?)(\?>)'s", true);
+        $this->remove_noise("'(<\?)(.*?)(\)'s", true);
         // strip smarty scripts
         $this->remove_noise("'(\{\w)(.*?)(\})'s", true);
 
@@ -972,4 +972,3 @@ class simple_html_dom {
     function getElementsByTagName($name, $idx=-1) {return $this->find($name, $idx);}
     function loadFile() {$args = func_get_args();$this->load(call_user_func_array('file_get_contents', $args), true);}
 }
-?>

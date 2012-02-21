@@ -24,4 +24,3 @@ function setMeta( &$article , $easyset ) {
 	$first_article = false ;
 }
 
-?>

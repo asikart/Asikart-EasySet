@@ -2,8 +2,7 @@
 
 function saveImages( $context , &$article )
 {
-	$context = explode( '.' , $context );
-	if( 'com_content' !== $context[0] ) return ;
+	if( 'com_content' != JRequest::getVar('com_content') );
 	
 	$db = JFactory::getDbo();
 	
@@ -50,5 +49,3 @@ function saveImages( $context , &$article )
 	endif;
 	
 }
-
-?>

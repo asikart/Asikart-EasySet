@@ -47,4 +47,3 @@ if(JFile::write( $configFile , $file ))
 else
 	echo '覆蓋失敗，請檢查configuration.php權限' ;
 
-?>

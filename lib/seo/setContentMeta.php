@@ -75,4 +75,3 @@ function setContentMeta ( &$article , &$easyset ) {
 	$first_article = false ;
 }
 
-?>

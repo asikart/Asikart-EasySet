@@ -184,4 +184,4 @@ class plgSystemAsikart_easyset extends JPlugin
 	}
 	
 }
-?>
+

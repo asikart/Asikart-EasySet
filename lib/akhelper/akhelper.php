@@ -150,4 +150,3 @@ class AKHelper
 class AK extends AKHelper {
 	
 }
-?>

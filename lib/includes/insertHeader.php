@@ -17,4 +17,3 @@ function insertHeader() {
 	//$doc->addCustomTag( '<link rel="stylesheet" href="easyset/custom.css" type="text/css" />' );
 }
 
-?>

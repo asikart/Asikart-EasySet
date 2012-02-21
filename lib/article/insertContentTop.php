@@ -24,4 +24,3 @@ function insertContentTop() {
 	return $output ;
 }
 
-?>

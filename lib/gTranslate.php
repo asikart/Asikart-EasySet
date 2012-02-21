@@ -27,4 +27,3 @@ function gTranslate ($text,$SourceLan,$ResultLan) {
 	return $r[0]->translatedText ;
 }
 
-?>

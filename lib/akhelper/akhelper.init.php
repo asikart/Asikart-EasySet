@@ -22,4 +22,4 @@ require_once (AK_HELPER_PATH.DS.'akhelper.php') ;
 //$multictrl = AK::_( 'app.isAdmin') ? $multictrl_admin : $multictrl_site ; 
 //require_once AK_HELPER_PATH.DS.'component.portal.php' ;
 
-?>
+

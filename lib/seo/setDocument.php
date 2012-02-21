@@ -70,5 +70,3 @@ function setDocument( $easyset ) {
 	
 	
 }
-
-?>

@@ -32,4 +32,4 @@ function closeTags ( $html )
     return $html;
 }
 
-?>
+

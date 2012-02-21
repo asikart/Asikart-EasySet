@@ -30,7 +30,7 @@ endif;
 $installFiles = JFolder::files($installPath,'.',true,true,
 				array('.svn', 'CVS','.DS_Store','__MACOSX','error_log','backup','tmp','cache' ),array('.*~'));
 
-?>
+
 <h1>壓縮中，完成將自動下載 - ASIKART Backup System</h1>
 
 <textarea  cols="120" rows="20">
@@ -48,7 +48,7 @@ endforeach;
 echo $optput ;
 
 //jexit();
-?>
+
 
 </textarea>
 <br /><br /><br />
@@ -127,4 +127,3 @@ if ($zip->open( $zipFile ,ZipArchive::CREATE) === TRUE) {
 $mainframe->redirect( JURI::root().'backup/' . $zipFileName);
 
 
-?>

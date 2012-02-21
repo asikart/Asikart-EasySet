@@ -26,4 +26,4 @@ $controller = new $controller( );
 // Perform the Request task
 $controller->execute( JRequest::getCmd('task'));
 $controller->redirect();
-?>
+
