@@ -1,6 +1,6 @@
 <?php
 
-function tranAlias (&$easyset) {
+function tranAlias ($easyset) {
 	// set translate language
 	$SourceLan = $easyset->params->get('originLan');
     $ResultLan = $easyset->params->get('tranLlan','en');
@@ -37,7 +37,7 @@ function tranAlias (&$easyset) {
 	JRequest::setVar( 'jform' , $post['jform'] );
 }
 /*
-function tranAlias (&$article , $easyset) {
+function tranAlias ($article , $easyset) {
 	$SourceLan = $easyset->params->get('originLan');
     $ResultLan = $easyset->params->get('tranLlan','en');
     

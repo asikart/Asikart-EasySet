@@ -1,6 +1,6 @@
 <?php
 
-function setOpenGraph ( $context , &$article , &$es) {
+function setOpenGraph ( $context , $article , $es) {
 	
 	$view = JRequest::getVar( 'view' );
 	

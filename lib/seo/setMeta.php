@@ -1,6 +1,6 @@
 <?php
 
-function setMeta( &$article , $easyset ) {
+function setMeta( $article , $easyset ) {
 	
 	if($easyset->app->isAdmin()) return ;
 	

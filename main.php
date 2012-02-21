@@ -49,7 +49,7 @@ class plgSystemAsikart_easyset extends JPlugin
         array_shift( $args );
         
 		if( function_exists ( $func_name ) )
-			return call_user_func_array( $func_name , &$args );
+			return call_user_func_array( $func_name , $args );
 	}
 	
 	public function includeEvent($func) {

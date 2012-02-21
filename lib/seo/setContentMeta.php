@@ -1,6 +1,6 @@
 <?php
 
-function setContentMeta ( &$article , &$easyset ) {
+function setContentMeta ( $article , $easyset ) {
 	
 	$metaDesc = null ;
 	
