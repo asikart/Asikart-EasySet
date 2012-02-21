@@ -10,4 +10,4 @@ foreach( $submenu as $val ):
 		JSubMenuHelper::addEntry( JText::_($val) , "index.php?option={$option}&{$view}={$val}" );
 	endif;
 endforeach;
-?>
+

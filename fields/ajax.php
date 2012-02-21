@@ -59,7 +59,7 @@ class JFormFieldAjax extends JFormField
 		});
 		
 AJAX;
-		$doc =& JFactory::getDocument(); 
+		$doc = JFactory::getDocument(); 
 		$doc->addScriptDeclaration($ajaxCode);
 
 		$link = '<div id="'.$name.'_response" ><input id="'.$name.'" type="button" value="按此覆蓋"></div>';

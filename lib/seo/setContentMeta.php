@@ -8,8 +8,8 @@ function setContentMeta ( &$article , &$easyset ) {
 	static $first_article = true ;
 	if( !$first_article ) return ;
 	
-	$doc 	=& JFactory::getDocument();
-	$config =& JFactory::getConfig();
+	$doc 	= JFactory::getDocument();
+	$config = JFactory::getConfig();
 	
 	// get menu meta, if nonexists, use article meta
 	if( isset($article->params) && isset($article->metadesc) )
@@ -75,4 +75,3 @@ function setContentMeta ( &$article , &$easyset ) {
 	$first_article = false ;
 }
 
-?>

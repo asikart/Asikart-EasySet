@@ -2,7 +2,7 @@
 
 class AKArray {
 	
-	function getItem ($data, $key=0, $separator=',') {
+	public static function getItem ($data, $key=0, $separator=',') {
 		if( is_array($key) ) return $data[$key] ;
 		
 		$data = explode( $separator , $data );
@@ -13,4 +13,4 @@ class AKArray {
 	
 }
 
-?>
+

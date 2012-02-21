@@ -40,4 +40,4 @@ define( $extension_name.'_ADMIN_URL'	, JURI::root().str_replace( DS, '/', 'admin
 //Define AKHelper Paths
 define( 'AK_HELPER_PATH'				, $akhelper_path ) ;
 
-?>
+

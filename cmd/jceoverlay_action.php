@@ -2,7 +2,7 @@
 header('Content-Type:text/html;charset=utf-8');//防止中文信息有亂碼
 header('Cache-Control:no-cache');//防止瀏覽器緩存，導致按F5刷新不管用
 
-$db =& JFactory::getDBO();
+$db = JFactory::getDBO();
 
 $sql = <<<SQL
 

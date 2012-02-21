@@ -51,4 +51,3 @@ function customCode( $position , $prepareContent = false , &$article = null ) {
 	endif;
 }
 
-?>

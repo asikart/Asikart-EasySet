@@ -1,8 +1,9 @@
 <?php
 
 function setStyle() {
-	$doc =& JFactory::getDocument();
+	$doc = JFactory::getDocument();
 	if( $doc->getType() != 'html' ) return ;
+
 	
 	//include_once AK_LIB_PATH.DS.'dom'.DS.'simple_html_dom.php';
 	$body = JResponse::getBody();
@@ -43,5 +44,3 @@ function setStyle() {
     $body = implode( '</head>' , $body );
 	JResponse::setBody($body);
 }
-
-?>

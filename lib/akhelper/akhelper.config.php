@@ -14,4 +14,4 @@ class AKConfig extends JObject {
 	
 }
 
-?>
+

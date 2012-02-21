@@ -4,10 +4,10 @@ function setDocument( $easyset ) {
 	
 	if($easyset->app->isAdmin()) return ;
 	
-	$doc 		=& JFactory::getDocument();
+	$doc 		= JFactory::getDocument();
 	if($doc->getType() != 'html' ) return ;
 	
-	$config 	=& JFactory::getConfig();
+	$config 	= JFactory::getConfig();
 	$siteName	=  $config->getValue('sitename');
 	
 	//$easyset->_metaDesc = $doc->getBuffer('component' , '') ;
@@ -70,5 +70,3 @@ function setDocument( $easyset ) {
 	
 	
 }
-
-?>

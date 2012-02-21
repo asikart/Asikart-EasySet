@@ -13,7 +13,8 @@ function addFbLikeButton ($context, &$article) {
 	$position = $es->params->get('fbLikePosition' , 1 ) ;
 	
 	$like = <<<LIKE
-		<div id="fb-root asikart-fb-like"></div>
+	<div class="asikart-fb-like">
+		<div id="fb-root"></div>
 		<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
 		  if (d.getElementById(id)) {return;}
@@ -23,6 +24,7 @@ function addFbLikeButton ($context, &$article) {
 		}(document, 'script', 'facebook-jssdk'));</script>
 		
 		<fb:like href="{$uri}" send="false" show_faces="false"></fb:like>
+	</div>
 LIKE;
 	
 	
@@ -56,5 +58,3 @@ LIKE;
 	}
 	
 }
-
-?>

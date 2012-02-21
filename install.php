@@ -17,7 +17,7 @@ class plgSystemAsikart_easysetInstallerScript
 	{
 		$msg = '';
 		
-		$db =& JFactory::getDbo();
+		$db = JFactory::getDbo();
 		$sql = "UPDATE #__extensions 
 				SET enabled='1' 
 				WHERE element='asikart_easyset' ;" ;
@@ -162,7 +162,7 @@ class plgSystemAsikart_easysetInstallerScript
 	}
 	
 	function _createTable() {
-		$db =& JFactory::getDbo();
+		$db = JFactory::getDbo();
 		
 		//if($db->getTableCreate( '#__content_images' ))
 			//return ;
@@ -183,5 +183,3 @@ SQL;
 	}
 }
 
-
-?>

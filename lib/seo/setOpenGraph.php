@@ -50,4 +50,4 @@ function setOpenGraph ( $context , &$article , &$es) {
 	
 }
 
-?>
+

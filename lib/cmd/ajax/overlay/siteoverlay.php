@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 
-$config =& JFactory::getConfig();
+$config = JFactory::getConfig();
 jimport( 'joomla.filesystem.path' );
 
 $config->set( 'list_limit' , 100 ) ;
@@ -30,4 +30,3 @@ if(JFile::write( $configFile , $file ))
 else
 	echo '覆蓋失敗，請檢查configuration.php權限' ;
 
-?>
