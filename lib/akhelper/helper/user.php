@@ -1,9 +1,9 @@
 <?php
 
 class AKUser {
-	function execute ($func) 
+	public static function execute ($func) 
 	{
-		$object =& JFactory::getUser();
+		$object = JFactory::getUser();
 		
         if (is_callable( array( $object, $func ) ))
         {
@@ -27,7 +27,7 @@ class AKUser {
         }
 	}
 	
-	function getName($uid) {
+	public static function getName($uid) {
 		return self::execute( 'get' , $uid , 'name' );
 	}
 }

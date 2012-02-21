@@ -3,7 +3,7 @@
 class AKHelper
 {
 	public static function isHome() {
-		$juri =& JFactory::getURI();
+		$juri = JFactory::getURI();
 		$current_url = $juri->toString();
 		
 		if( $juri->base()==$current_url || $juri->base().'index.php' == $current_url ) 

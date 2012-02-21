@@ -2,7 +2,7 @@
 
 function setScript() {
 	
-	$doc =& JFactory::getDocument();
+	$doc = JFactory::getDocument();
 	$doc->addScript( AK_JS_URL.'/easyset.js' );
 		
 	$script = 

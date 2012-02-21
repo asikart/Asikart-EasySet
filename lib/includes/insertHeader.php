@@ -1,7 +1,7 @@
 <?php
 
 function insertHeader() {
-	$doc =& JFactory::getDocument();
+	$doc = JFactory::getDocument();
 	if( $doc->getType() !== 'html' ) return ;
 	
 	$es = AK::getEasyset();

@@ -1,9 +1,9 @@
 <?php
 
 class AKURI {
-	function execute ($func) 
+	public static function execute ($func) 
 	{
-		$object =& JFactory::getURI();
+		$object = JFactory::getURI();
 		
         if (is_callable( array( $object, $func ) ))
         {

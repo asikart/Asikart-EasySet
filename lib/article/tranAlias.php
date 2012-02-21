@@ -13,7 +13,7 @@ function tranAlias (&$easyset) {
     $title = $post['jform']['title'] ;
     
     $titleTmp = explode( '::' , $post['jform']['title']);
-    if( $titleTmp[1] ) :
+    if( !empty($titleTmp[1]) ) :
 		$title = $titleTmp[0];
 		$alias = JFilterOutput::stringURLSafe($titleTmp[1]);
 	endif;
@@ -50,7 +50,7 @@ function tranAlias (&$article , $easyset) {
 	$alias2 = JFilterOutput::stringURLSafe($article->title);
 	
     if(trim(str_replace('-','',$alias2)) == '') {
-        $datenow =& JFactory::getDate();
+        $datenow = JFactory::getDate();
         $alias2 = $datenow->toFormat("%Y-%m-%d-%H-%M-%S");
     }
 	

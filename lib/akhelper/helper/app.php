@@ -2,9 +2,9 @@
 
 class AKApp {
 	
-	function execute ($func) 
+	public static function execute ($func) 
 	{
-		$app =& JFactory::getApplication();
+		$app = JFactory::getApplication();
 		
         if (is_callable( array( $app, $func ) ))
         {
@@ -23,23 +23,23 @@ class AKApp {
         }
 	}
 	
-	function isSite() {
+	public static function isSite() {
 		return self::execute( 'isSite' );
 	}
 	
-	function isAdmin() {
+	public static function isAdmin() {
 		return self::execute( 'isAdmin' );
 	}
 	
-	function getConfig( $key ) {
+	public static function getConfig( $key ) {
 		return self::execute( 'getCfg' , $key );
 	}
 	
-	function close() {
+	public static function close() {
 		self::execute( 'close' );
 	}
 	
-	function triggerEvent( $event, $args = null ) {
+	public static function triggerEvent( $event, $args = null ) {
 		self::execute( 'triggerEvent' , $event, $args );
 	}
 }

@@ -7,8 +7,8 @@ function setMeta( &$article , $easyset ) {
 	static $first_article = true ;
 	if( !$first_article ) return ;
 	
-	$doc 	=& JFactory::getDocument();
-	$config =& JFactory::getConfig();
+	$doc 	= JFactory::getDocument();
+	$config = JFactory::getConfig();
 	
 	if( AKHelper::isHome() ):
 		$easyset->_metaDesc 	= $config->getValue('MetaDesc');

@@ -1,9 +1,9 @@
 <?php
 
 class AKDate extends JDate {
-	function execute ($func , $date = 'now') 
+	public static function execute ($func , $date = 'now') 
 	{
-		$object =& JFactory::getDate($dtae);
+		$object = JFactory::getDate($dtae);
 		
         if (is_callable( array( $object, $func ) ))
         {
@@ -24,7 +24,7 @@ class AKDate extends JDate {
         }
 	}
 	
-	function toFormat($date='now' , $format='%Y-%m-%d %H:%M:%S') {
+	public static function toFormat($date='now' , $format='%Y-%m-%d %H:%M:%S') {
 		return self::execute( 'toFormat' , $date , $format );
 	}
 	
@@ -39,7 +39,7 @@ class AKDate extends JDate {
 	* TimeGap('year','now','2012-11-10');  Result = 2  ;
 	* TimeGap('month','2005-10-20');       Result = 49 ; 	
 	*/	
-	function timeGap($type, $start, $end=null) {
+	public static function timeGap($type, $start, $end=null) {
   
     //開始日期轉換成UNIX時間戳記
     if ($start == 'now')

@@ -2,9 +2,9 @@
 
 class AKDoc {
 	
-	function execute ($func) 
+	public static function execute ($func) 
 	{
-		$doc =& JFactory::getDocument();
+		$doc = JFactory::getDocument();
 		
         if (is_callable( array( $doc, $func ) ))
         {
@@ -23,48 +23,48 @@ class AKDoc {
         }
 	}
 	
-	function addCustomTag() {
+	public static function addCustomTag() {
 		return self::execute( 'addCustomTag' );
 	}
 	
-	function addJs() {
+	public static function addJs() {
 		return self::execute( 'addScript' );
 	}
 	
-	function addJsDecl() {
+	public static function addJsDecl() {
 		return self::execute( 'addScriptDeclaration' );
 	}
 	
-	function addCss() {
+	public static function addCss() {
 		return self::execute( 'addStyleSheet' );
 	}
 	
-	function addCssDecl() {
+	public static function addCssDecl() {
 		return self::execute( 'addStyleDeclaration' );
 	}
 	
-	function getTitle() {
+	public static function getTitle() {
 		return self::execute( 'getTitle' );
 	}
 	
-	function setTitle($title) {
+	public static function setTitle($title) {
 		return self::execute( 'setTitle' , $title );
 	}
 	
-	function getDescription() {
+	public static function getDescription() {
 		return self::execute( 'setDescription' );
 	}
 	
-	function setDescription($desc) {
+	public static function setDescription($desc) {
 		return self::execute( 'setDescription' , $desc );
 	}
 	
-	function getType() {
+	public static function getType() {
 		return self::execute( 'getType' );
 	}
 	
 	/*
-	function () {
+	public static function () {
 		return self::execute( '' );
 	}
 	*/

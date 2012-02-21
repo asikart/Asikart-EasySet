@@ -2,8 +2,8 @@
 
 function setTitle() {
 	$easyset	= AK::getEasyset();
-	$doc 		=& JFactory::getDocument();
-	$config 	=& JFactory::getConfig();
+	$doc 		= JFactory::getDocument();
+	$config 	= JFactory::getConfig();
 	$siteName	=  $config->getValue('sitename');
 		
 	if( AKHelper::isHome() ):

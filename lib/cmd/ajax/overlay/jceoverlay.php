@@ -1,6 +1,6 @@
 <?php
 
-$db =& JFactory::getDbo();
+$db = JFactory::getDbo();
 jimport( 'joomla.filesystem.path' );
 
 $sql = <<<SQL
@@ -35,7 +35,7 @@ SQL;
 $db->setQuery($sql);
 $db->queryBatch();
 
-$config =& JFactory::getConfig();
+$config = JFactory::getConfig();
 $config->set('editor' , 'jce' ) ;
 $configFile = JPATH_ROOT.DS.'configuration.php' ;
 

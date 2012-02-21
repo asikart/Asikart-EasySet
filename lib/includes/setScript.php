@@ -2,7 +2,7 @@
 
 function setScript() {
 	
-	$doc 	=& JFactory::getDocument();
+	$doc 	= JFactory::getDocument();
 	$body 	= JResponse::getBody();
 	
 	if( $doc->getType() !== 'html' ) return ;

@@ -5,7 +5,7 @@ function saveImages( $context , &$article )
 	$context = explode( '.' , $context );
 	if( 'com_content' !== $context[0] ) return ;
 	
-	$db =& JFactory::getDbo();
+	$db = JFactory::getDbo();
 	
 	// delete all images data first
 	if( $article->id ):
@@ -24,9 +24,10 @@ function saveImages( $context , &$article )
 		foreach( $imgs as $key => $img ) :
 			
 			$main = 0 ;
+			$link = '' ;
 			
 			if( $img->parentNode()->tag == 'a' ) 
-				$link = $img->parentNode() ;
+				$link = $img->parentNode()->href ;
 			
 			$class = $img->getAttribute ( 'class' ) ;
 			$class = explode( ' ' , $class );
@@ -37,7 +38,7 @@ function saveImages( $context , &$article )
 			$insert->contentid 	= $article->id ;
 			$insert->catid 		= $article->catid ;
 			$insert->url 		= $img->src ;
-			$insert->link 		= $link->href ;
+			$insert->link 		= $link ;
 			$insert->main 		= $main ;
 			$insert->ordering 	= $key ;
 			

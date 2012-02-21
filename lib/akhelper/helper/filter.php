@@ -2,7 +2,7 @@
 
 class AKFilter {
 	
-	function test() {
+	public static function test() {
 		echo 'test' ;
 	}
 	

@@ -2,9 +2,9 @@
 
 class AKDb {
 	
-	function execute ($func) 
+	public static function execute ($func) 
 	{
-		$class =& JFactory::getDbo();
+		$class = JFactory::getDbo();
 		
         if (is_callable( array( $class, $func ) ))
         {
@@ -23,30 +23,30 @@ class AKDb {
         }
 	}
 	
-	function setQuery( $sql ) {
-		$db =& JFactory::getDBO();
+	public static function setQuery( $sql ) {
+		$db = JFactory::getDBO();
 		$db->setQuery( $sql );
 		return $db ;
 	}
 	
-	function query( $sql ) {
+	public static function query( $sql ) {
 		return self::setQuery( $sql )->query();
 	}
 	
-	public function loadResult($sql){
+	public static function loadResult($sql){
 		return self::setQuery( $sql )->loadResult();
 	}
  
     /**
      * Load an array of single field results into an array
      */
-    public function loadResultArray($sql , $numinarray = 0){
+    public static function loadResultArray($sql , $numinarray = 0){
 		return self::setQuery( $sql )->loadResultArray($numinarray);
 	}
     /**
      * Fetch a result row as an associative array
      */
-    public function loadAssoc(){
+    public static function loadAssoc(){
 		return self::setQuery( $sql )->loadAssoc();
 	}
  
@@ -57,16 +57,16 @@ class AKDb {
      * @param    string    An optional column name. Instead of the whole row, only this column value will be in the return array.
      * @return    array    If key is empty as sequential list of returned records.
      */
-    public function loadAssocList($sql , $key = null, $column = null){
+    public static function loadAssocList($sql , $key = null, $column = null){
 		return self::setQuery( $sql )->loadAssocList($key , $column);
 	}
  
     /**
-     * This global function loads the first row of a query into an object
+     * This global public static function loads the first row of a query into an object
      *
      * @return    object 
      */
-    public function loadObject($sql){
+    public static function loadObject($sql){
 		return self::setQuery( $sql )->loadObject();
 	}
  
@@ -78,7 +78,7 @@ class AKDb {
      *  If <var>key</var> is not empty then the returned array is indexed by the value
      *  the database key.  Returns <var>null</var> if the query fails.
      */
-    public function loadObjectList($sql , $key=''){
+    public static function loadObjectList($sql , $key=''){
 		return self::setQuery( $sql )->loadObjectList($key);
 	}
  
@@ -87,7 +87,7 @@ class AKDb {
      *
      * @return    mixed    The first row of the query.
      */
-    public function loadRow($sql){
+    public static function loadRow($sql){
 		return self::setQuery( $sql )->loadRow();
 	}
  
@@ -100,7 +100,7 @@ class AKDb {
      * @param    string    The field name of a primary key
      * @return    array 
      */
-    public function loadRowList($sql , $key=''){
+    public static function loadRowList($sql , $key=''){
 		return self::setQuery( $sql )->loadRowList($key);
 	}
  
@@ -111,7 +111,7 @@ class AKDb {
      *
      * @since    1.6.0
      */
-    public function loadNextRow($sql){
+    public static function loadNextRow($sql){
 		return self::setQuery( $sql )->loadNextRow();
 	}
  
@@ -122,7 +122,7 @@ class AKDb {
      *
      * @since    1.6.0
      */
-    public function loadNextObject($sql){
+    public static function loadNextObject($sql){
 		return self::setQuery( $sql )->loadNextObject();
 	}
  
@@ -132,8 +132,8 @@ class AKDb {
      * @param    object    An object whose properties match table fields
      * @param    string    The name of the primary key. If provided the object property is updated.
      */
-    public function insertObject($table, &$object, $keyName = NULL){
-		$db =& JFactory::getDBO();
+    public static function insertObject($table, &$object, $keyName = NULL){
+		$db = JFactory::getDBO();
 		return $db->insertObject($table, &$object, $keyName) ;
 	}
  
@@ -145,8 +145,8 @@ class AKDb {
      * @param    string 
      * @param    boolean 
      */
-    public function updateObject($table, &$object, $keyName, $updateNulls=false){
-		$db =& JFactory::getDBO();
+    public static function updateObject($table, &$object, $keyName, $updateNulls=false){
+		$db = JFactory::getDBO();
 		return $db->updateObject($table, &$object, $keyName, $updateNulls) ;
 	}
 }

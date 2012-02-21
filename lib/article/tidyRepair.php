@@ -2,8 +2,8 @@
 
 function tidyRepair(&$article , $easyset) {
 	
-	$context = explode( '.' , $context );
-	if( 'com_content' !== $context[0] ) return ;
+	if( 'com_content' != JRequest::getVar('option') ) return ;
+	
 	if( !$article->introtext && !$article->fulltext ) return ;
 	
 	if(function_exists('tidy_repair_string')):
