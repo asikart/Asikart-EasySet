@@ -1,5 +1,5 @@
 <?php
-
+//
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 $akpath 	= JPATH_ROOT.DS.'easyset' ;
