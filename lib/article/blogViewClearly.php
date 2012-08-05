@@ -2,7 +2,8 @@
 
 function blogViewClearly( $context, $article, $params = null ){
 	
-	if( /*JRequest::getVar( 'option' ) != 'com_content' && */ JRequest::getVar( 'layout' ) != 'blog' )
+	if( /*JRequest::getVar( 'option' ) != 'com_content' && */ JRequest::getVar( 'layout' ) != 'blog' &&
+	   JRequest::getVar( 'view' ) != 'featured')
 		return ;
 	
 	$es 		= AK::getEasySet();	
@@ -12,17 +13,9 @@ function blogViewClearly( $context, $article, $params = null ){
 	$allowTags 	= $es->params->get( 'blogViewTagsAllow' );
 	$doc		= JFactory::getDocument();
 	$text		= $article->introtext ;
+	$mainImg	= null ;
 	
 	if( $doc->getType() != 'html' ) return ;
-	
-	// Handle Image
-	$mainImg = AK::getArticleImages($article->id,true)->url ;
-	
-	if( $crop ):
-		$imageUrl 	= AK::thumb( $mainImg , $imgW , $imgW , $crop ) ;
-	else:
-		$imageUrl 	= AK::thumb( $mainImg , $imgW , '' , $crop ) ; ;
-	endif;
 	
 	// Clean Tags
 	if( $es->params->get('blogViewCleanTags' , 1 ) ) :
@@ -32,23 +25,34 @@ function blogViewClearly( $context, $article, $params = null ){
 		// If first image = main image, delete this paragraph.
 		$html = str_get_html ( $text ) ;
 		$imgs = $html->find( 'img' );
+		
+		if($imgs) :
+			$mainImg = $imgs[0]->src ;
+		
+			$p 	= $imgs[0]->parent(); // is img in p tag?
+			if( $p->tag != 'p' ) $p = $p->parent(); // if image has anchor, get parent.
 			
-		$p 	= $imgs[0]->parent(); // is img in p tag?
-		if( $p->tag != 'p' ) $p = $p->parent(); // if image has anchor, get parent.
-		
-		$imgtext 		= $p->children[0]->outertext;
-		$p->innertext 	= str_replace( $imgtext , '' , $p->innertext) ;
-		
-		if( !trim( $p->innertext ) ) :
-			$p->outertext = '' ;
+			$imgtext 		= $p->children[0]->outertext;
+			$p->innertext 	= str_replace( $imgtext , '' , $p->innertext) ;
+			
+			if( !trim( $p->innertext ) ) :
+				$p->outertext = '' ;
+			endif;
+			
+			$text	= $html->save();
+			$text	= strip_tags( $text , $allowTags ) ;
+			
+			if( !$allowTags )
+				$text = JString::substr( $text , 0 , $maxChar );
+			
 		endif;
-		
-		$text	= $html->save();
-		$text	= strip_tags( $text , $allowTags ) ;
-		
-		if( !$allowTags )
-			$text = JString::substr( $text , 0 , $maxChar );
-		
+	endif;
+	
+	// Handle Image
+	if( $crop ):
+		$imageUrl 	= AK::thumb( $mainImg , $imgW , $imgW , $crop ) ;
+	else:
+		$imageUrl 	= AK::thumb( $mainImg , $imgW , '' , $crop ) ; ;
 	endif;
 	
 	// Article Link

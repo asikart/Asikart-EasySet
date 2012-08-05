@@ -23,7 +23,10 @@ define('AK_ADMIN_JS_URL'	, AK_ADMIN_URL.'/lib/includes/js');
 define('AK_ADMIN_CSS_URL'	, AK_ADMIN_URL.'/lib/includes/css');
 
 define('AK_THUMB_URL'		, AK_ADMIN_URL.'/lib/timthumb.php');
-define('AK_THUMBTEMP_URL'	, AK_ADMIN_URL.'/imgs/thumbs/');
+define('AK_THUMB_PATH'		, JPATH_ROOT.DS.'cache'.DS.'thumbs');
+define('AK_THUMBTEMP_PATH'	, AK_THUMB_PATH.DS.'temp');
+define('AK_THUMBCACHE_PATH', AK_THUMB_PATH.DS.'cache');
+define('AK_THUMBCACHE_URL'	, JURI::root().'cache/thumbs/cache');
 /*
 $mainfile = $akpath.DS.'main.php' ;
 if( !file_exists($mainfile) ) {

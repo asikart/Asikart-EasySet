@@ -3,6 +3,7 @@
 function setOpenGraph ( $context , $article , $es) {
 	
 	$view = JRequest::getVar( 'view' );
+	if( empty($article->id)) return ;
 	
 	if( 'article' == $view ) :
 		
@@ -14,7 +15,7 @@ function setOpenGraph ( $context , $article , $es) {
 		
 		$catimg = $cat->params->get( 'image' );
 		
-		if( $img->url ) {
+		if( isset($img->url) ) {
 			$es->ogImage = $img->url ;
 		}elseif( $catimg ){
 			$es->ogImage = AK::pathAddHost($catimg) ;

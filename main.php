@@ -15,6 +15,8 @@ class plgSystemAsikart_easyset extends JPlugin
 	
 	public $_catName 	;
 	
+	public $ogImage		;
+	
 	/**
 	 * Constructor
 	 *
@@ -88,13 +90,19 @@ class plgSystemAsikart_easyset extends JPlugin
 	
 	
 	public function onContentPrepare($context, &$article, &$params, $page = 0) {
+		// getMeta
 		if( $this->params->get( 'getMeta' , 1 ) ) $this->getFunction( 'seo.setContentMeta' , $article , $this );
+		
+		// openGraph
 		if( $this->params->get( 'openGraph' , 1 ) ) $this->getFunction( 'seo.setOpenGraph' , $context , $article , $this );
 		
+		// Auto Thumb
 		if( $this->params->get( 'autoThumbnail' , 1 ) ) $this->getFunction( 'article.autoThumbnail' , $context, $article, $params ) ;
 		
+		// input Code
 		$this->getFunction( 'article.inputCode' , $article , $this );
 		
+		// customCode
 		$this->getFunction( 'article.customCode' , 'insertArticleTop' , true , $article );
 		$this->getFunction( 'article.customCode' , 'insertContentTop' , true , $article );
 		
@@ -106,11 +114,9 @@ class plgSystemAsikart_easyset extends JPlugin
 	{
 		$result = null ;
 		
+		// blog View Clearly
 		if( $this->params->get( 'blogViewClearly' , 1 ) )
 			$this->getFunction( 'article.blogViewClearly' , $context, $article, $params );
-		
-		if( $this->params->get( 'fbLike' ) )
-			$this->getFunction( 'article.addFbLikeButton' , $context, $article);
 		
 		@include $this->includeEvent(__FUNCTION__);
 		
@@ -122,8 +128,13 @@ class plgSystemAsikart_easyset extends JPlugin
 	{
 		$result = null ;
 		
+		// customCode
 		if( JRequest::getVar('view') == 'article' )
 			$result = $this->getFunction( 'article.customCode' , 'insertContentBottom' );
+		
+		// FB Like
+		if( $this->params->get( 'fbLike' ) )
+			$this->getFunction( 'article.addFbLikeButton' , $context, $article);
 		
 		@include $this->includeEvent(__FUNCTION__);
 		

@@ -19,11 +19,8 @@ class AKHelper
 	
 	
 	public static function thumb($url=null , $width=100, $height=100,$zc=0, $q=85 ){
-		if(!$url) $url  = AK_THUMBTEMP_URL.'default_img.png';
-		if( !file_exists( $url ) ) $url = JURI::root().'easyset/imgs/thumbs/default_img.png' ;
-		
-		$url 			= AKHelper::urlBase64( 'encode' , $url );
-		$path 			= AK_THUMB_URL."?w={$width}&h={$height}&zc={$zc}&q={$q}&src={$url}";
+		//echo $url 	= self::_('uri.pathAddHost', $url);
+		$path 	= self::_('thumb.resize', $url , $width, $height,$zc, $q) ;
 		return $path ;
 	}
 	

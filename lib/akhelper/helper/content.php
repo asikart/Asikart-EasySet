@@ -50,6 +50,15 @@ class AKContent {
 				$result = $db->loadObject();
 			endif;
 			
+			if( !$result ){
+				
+				$result = new JObject();
+				$result->url = false ;
+				$result->link = false ;
+				
+				return $result ;
+			}
+			
 			$result->url = AK::_( 'uri.pathAddHost' , $result->url );
 			$result->link = AK::_( 'uri.pathAddHost' , $result->link );
 			
