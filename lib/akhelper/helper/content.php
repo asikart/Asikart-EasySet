@@ -35,7 +35,8 @@ class AKContent {
 	
 	public static function getArticleImages( $id , $main = false ) {
 		
-		$db = JFactory::getDbo();
+		$db 	= JFactory::getDbo();
+		$result = null ;
 		
 		if( $main ) :
 			$where = " AND main='1' " ;

@@ -7,7 +7,7 @@
     <license>GNU/GPL</license>
     <authorEmail>asika@asikart.com</authorEmail>
     <authorUrl>http://asikart.com</authorUrl>
-    <version>2.4.4</version>
+    <version>2.5</version>
     <description>Asikart Easy Set. Easy setup Joomla! Site!</description>
     <files>
         <filename plugin="asikart_easyset">asikart_easyset.php</filename>
@@ -159,6 +159,24 @@
 					<option value="0">JNO</option>
 				</field>
 				<field name="showNumber" type="text" default="3" label="SHOW_NUMBER" description="SHOW_NUMBER_DESC" />
+			</fieldset>
+			<fieldset name="system">
+				<field name="languageOrphan" type="radio" default="0" label="LANGUAGE_ORPHAN" description="LANGUAGE_ORPHAN_DESC" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="languageOrphanPath" type="text" default="logs/language.ini" size="30" label="LANGUAGE_ORPHAN_PATH" description="LANGUAGE_ORPHAN_PATH_DESC" />
+				<field name="" 				type="spacer" hr="true" description="" />
+				<field name="cacheManagerEnabled" type="radio" default="0" label="CACHE_MANAGER_ENABLED" description="CACHE_MANAGER_ENABLED_DESC" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="cacheControlType" type="radio" default="exclude" label="CACHE_CONTROL_TYPE" description="CACHE_CONTROL_TYPE_DESC" >
+					<option value="exclude">CACHE_EXCLUDE</option>
+					<option value="include">CACHE_INCLUDE</option>
+				</field>
+				<field name="CacheMenus" type="menuitem" multiple="true" size="15" label="CACHE_MENUS" description="CACHE_MENUS_DESC" />
+				<field name="CacheQueries" type="textarea" cols="45" rows="8" label="CACHE_QUERIES" description="CACHE_QUERIES_DESC" />
 			</fieldset>
 			<fieldset name="advanced" addfieldpath="/plugins/system/asikart_easyset/fields">
 				<field name="siteoverlay" type="ajax" label="SITEOVERLAY" description="SITEOVERLAY_DESC" />

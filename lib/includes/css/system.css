@@ -26,7 +26,7 @@
 /* BLOG LAYOUT */
 .ak_blog_img_wrap{width:20%;padding:0 15px 15px 0;text-align:center;}
 .ak_blog_intro{width:70%;padding:0 15px;}
-.asikart-fb-like{margin:0 15px; }
+.asikart-fb-like{padding:15px 0; }
 
 /* Fade and Opacity */
 .hasOpacity{opacity:0.8;filter:alpha(opacity=80);}

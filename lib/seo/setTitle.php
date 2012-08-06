@@ -4,7 +4,13 @@ function setTitle() {
 	$easyset	= AK::getEasyset();
 	$doc 		= JFactory::getDocument();
 	$config 	= JFactory::getConfig();
-	$siteName	=  $config->getValue('sitename');
+	$siteName	= $config->getValue('sitename');
+	$view 		= JRequest::getVar( 'view' ) ;
+	$title		= $doc->getTitle();
+	
+	// fix for YOOTheme
+	$title = explode('|', $title);
+	$title = $title[0] ;
 		
 	if( AKHelper::isHome() ):
 		$easyset->_siteTitle 	= $config->getValue('sitename');
@@ -12,9 +18,13 @@ function setTitle() {
 		$separator = trim($easyset->params->get('titleSeparator'));
 		
 		$replace['{%SITE%}'] 		= $siteName ;
-		$replace['{%CATEGORY%}'] 	= $easyset->_catName ;
-		$replace['{%TITLE%}'] 		= $doc->getTitle() ;
-			
+		$replace['{%TITLE%}'] 		= $title ;
+		
+		if( 'category' == $view || 'categories' == $view )
+			$replace['{%CATEGORY%}'] 	= '' ;
+		else
+			$replace['{%CATEGORY%}'] 	= $easyset->_catName ;
+		
 		$siteTitle = strtr( $easyset->params->get('titleFix') , $replace );
 		$siteTitle = explode( '|' , $siteTitle );
 		foreach( $siteTitle as $k => $v ) {

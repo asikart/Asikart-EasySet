@@ -7,9 +7,9 @@ class AKThumb
 	 * @param $arg
 	 */
 	
-	public static function resize($url = '', $width=100, $height=100,$zc=0, $q=85, $file_type = 'jpg' )
+	public static function resize($url = null, $width=100, $height=100,$zc=0, $q=85, $file_type = 'jpg' )
 	{
-		
+		if(!$url) $url = JPath::clean(JPATH_ROOT.'/plugins/system/asikart_easyset/imgs/thumbs/default_img.png');
 		$path = self::getImagePath($url) ;
 		
 		$img = new JImage();
@@ -36,7 +36,7 @@ class AKThumb
 			$img = self::crop($img, $width , $height, $imgdata);
 		
 		// resize
-		$img = $img->resize($width, $height, true);
+		$img = $img->resize($width, $height);
 		
 		// save
 		switch($file_type){
@@ -100,13 +100,25 @@ class AKThumb
 		if( $h >= $w ){
 			$rH = $oH ;
 			$rW = $oH * $p ;
-			$x = ( $oW - $rW ) / 2 ;
+			
+			$x = 0 ;
 			$y = 0 ;
+			
+			if( $oH > $oW )
+				$x = ( $oW - $rW ) / 2 ;
+			else
+				$y = ( $oH - $rH ) / 2 ;
 		}else{
 			$rW = $oW ;
 			$rH = $oW / $p ;
+			
 			$x = 0 ;
-			$y = ( $oH - $rH ) / 2 ;
+			$y = 0 ;
+			
+			if( $oH > $oW )
+				$x = ( $oW - $rW ) / 2 ;
+			else
+				$y = ( $oH - $rH ) / 2 ;
 		}
 		
 		$img = $img->crop($rW, $rH, $x, $y);

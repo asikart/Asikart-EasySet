@@ -52,6 +52,7 @@ function setContentMeta ( $article , $easyset ) {
 	
 	// save article and category data to easyset
 	$view 	= JRequest::getVar( 'view' ) ;
+	include_once JPath::clean(JPATH_ROOT.'/libraries/joomla/database/table/category.php') ;
 	$cat 	= JTable::getInstance( 'Category' );
 	
 	if( 'category' == $view || 'categories' == $view ):

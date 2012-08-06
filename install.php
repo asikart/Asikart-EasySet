@@ -65,8 +65,8 @@ class plgSystemAsikart_easysetInstallerScript
 		$plugin = $db->loadObject() ;
 		$link = 'index.php?option=com_plugins&task=plugin.edit&extension_id='.$plugin->extension_id ;
 		
-		$msg .= "<p>Easy set 安裝成功。</p>
-				<h3><a href=\"{$link}\">進入外掛管理</a></h3>";
+		$msg = "<p>Easy set 安裝成功。</p>
+				<h3><a href=\"{$link}\">進入外掛管理</a></h3>".$msg;
 		echo $msg ;
 	}
  

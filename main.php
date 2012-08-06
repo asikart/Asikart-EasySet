@@ -32,6 +32,10 @@ class plgSystemAsikart_easyset extends JPlugin
 		$this->app = JFactory::getApplication();
     }
     
+	public function callFunction( $func ) {
+		return $this->getFunction( $func );
+	}
+	
     public function getFunction( $func ) {
 		$func_name = explode( '.' , $func );
 		$func_name = array_pop($func_name);
@@ -59,11 +63,22 @@ class plgSystemAsikart_easyset extends JPlugin
 		if(file_exists( $event )) return $event ;
 	}
 	
+	public function resultBool($result = array()) {
+		foreach( $result as $result ):
+			if(!$result) return false ;
+		endforeach;
+		
+		return true ;
+	}
+	
 	// =========================== Events ======================================
 	
 	public function onAfterInitialise() {
+		
 		$this->getFunction( 'doCmd' ) ;
 		if( $this->params->get( 'tranAlias' , 1 ) ) $this->getFunction( 'article.tranAlias' , $this );
+		
+		if( $this->params->get( 'languageOrphan' , 0 ) ) $this->getFunction( 'system.languageOrphan' );
 		
 		@include $this->includeEvent(__FUNCTION__);
 	}
@@ -85,6 +100,8 @@ class plgSystemAsikart_easyset extends JPlugin
 	public function onAfterRender() {
 		$this->getFunction( 'includes.insertHeader' );
 		$this->getFunction( 'includes.setStyle' );
+		
+		if( $this->params->get( 'cacheManagerEnabled' , 0 ) && $this->app->isSite() ) $this->getFunction( 'system.cacheManager' );
 		@include $this->includeEvent(__FUNCTION__);
 	}
 	
@@ -153,45 +170,57 @@ class plgSystemAsikart_easyset extends JPlugin
 	
 	public function onContentBeforeSave($context, &$article, $isNew)
 	{
+		$result = array() ;
+		
 		if( 'com_categories.category' !== $context ):
-			if( $this->params->get( 'tidyRepair' , 1 ) ) $this->getFunction( 'article.tidyRepair' , $article , $this );
+			if( $this->params->get( 'tidyRepair' , 1 ) ) $result[] = $this->getFunction( 'article.tidyRepair' , $article , $this );
 		endif;
 		
 		@include $this->includeEvent(__FUNCTION__);
+		
+		return $this->resultBool($result);
 	}
 	
 	
 	public function onContentAfterSave($context, &$article, $isNew)
 	{
-		if( $this->params->get( 'getImages' , 1 ) ) $this->getFunction( 'article.saveImages' , $context , $article );
+		$result = array() ;
+		
+		if( $this->params->get( 'getImages' , 1 ) ) $result[] = $this->getFunction( 'article.saveImages' , $context , $article );
 		
 		@include $this->includeEvent(__FUNCTION__);
 
-		return true;
+		return $this->resultBool($result);
 	}
 	
 	
 	public function onContentBeforeDelete($context, $data)
 	{
+		$result = array() ;
+		
 		@include $this->includeEvent(__FUNCTION__);
 		
-		return true;
+		return $this->resultBool($result);
 	}
 	
 	
 	public function onContentAfterDelete($context, $data)
 	{
+		$result = array() ;
+		
 		@include $this->includeEvent(__FUNCTION__);
 		
-		return true;
+		return $this->resultBool($result);
 	}
 	
 	
 	public function onContentChangeState($context, $pks, $value)
 	{
+		$result = array() ;
+		
 		@include $this->includeEvent(__FUNCTION__);
 		
-		return true;
+		return $this->resultBool($result);
 	}
 	
 }

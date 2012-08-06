@@ -41,11 +41,14 @@ class AKHelper
 	}
 	
 	public static function getEasySet() {
+		static $es = null ;
+		if($es) return $es ;
+		
 		$dispatcher = JDispatcher::getInstance();
 		$observers	= $dispatcher->get('_observers');
 		foreach( $observers as $observer ) {
 			if( get_class($observer) == 'plgSystemAsikart_easyset' ) 
-				return $observer ;
+				return $es = $observer ;
 		}
 	}
 	
