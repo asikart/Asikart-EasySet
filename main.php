@@ -32,6 +32,10 @@ class plgSystemAsikart_easyset extends JPlugin
 		$this->app = JFactory::getApplication();
     }
     
+	public function callFunction( $func ) {
+		return $this->getFunction( $func );
+	}
+	
     public function getFunction( $func ) {
 		$func_name = explode( '.' , $func );
 		$func_name = array_pop($func_name);
@@ -70,10 +74,12 @@ class plgSystemAsikart_easyset extends JPlugin
 	// =========================== Events ======================================
 	
 	public function onAfterInitialise() {
+		if( $this->params->get( 'cacheManagerEnabled' , 0 ) && $this->app->isSite() ) $this->getFunction( 'system.cacheManager' );
+		
 		$this->getFunction( 'doCmd' ) ;
 		if( $this->params->get( 'tranAlias' , 1 ) ) $this->getFunction( 'article.tranAlias' , $this );
 		
-		if( $this->params->get( 'languageOrphan' , 0 ) ) $this->getFunction( 'debug.languageOrphan' );
+		if( $this->params->get( 'languageOrphan' , 0 ) ) $this->getFunction( 'system.languageOrphan' );
 		
 		@include $this->includeEvent(__FUNCTION__);
 	}
