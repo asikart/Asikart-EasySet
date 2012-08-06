@@ -20,5 +20,6 @@ function tidyRepair($article , $easyset) {
     	$article->introtext = closetags($article->introtext);
     	$article->fulltext  = closetags($article->fulltext);
     endif;
+	
 }
 

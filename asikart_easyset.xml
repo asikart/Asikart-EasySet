@@ -7,7 +7,7 @@
     <license>GNU/GPL</license>
     <authorEmail>asika@asikart.com</authorEmail>
     <authorUrl>http://asikart.com</authorUrl>
-    <version>2.5</version>
+    <version>2.5.1</version>
     <description>Asikart Easy Set. Easy setup Joomla! Site!</description>
     <files>
         <filename plugin="asikart_easyset">asikart_easyset.php</filename>
@@ -25,7 +25,7 @@
     <config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="insertjQuery" 			default="0" type="radio" label="INSERT_JQUERY" description="INSERT_JQUERY_DESC" >
+				<!--<field name="insertjQuery" 			default="0" type="radio" label="INSERT_JQUERY" description="INSERT_JQUERY_DESC" >
 		        	<option value="1">JYES</option>
 		            <option value="0">JNO</option>
 		        </field>
@@ -42,20 +42,20 @@
 		     		<option value="1">JYES</option>
 		            <option value="0">JNO</option>
 		        </field>
-		     	<field name="spacer" 				type="spacer" hr="true" label="" description="" />
+		     	<field name="spacer" 				type="spacer" hr="true" label="" description="" />-->
 		     	<field name="colorTable" 			default="0" type="radio" label="COLOR_TABLE" description="COLOR_TABLE_DESC" >
 		     		<option value="1">JYES</option>
 		            <option value="0">JNO</option>
 		        </field>
-		     	<field name="accessibility" 		default="0" type="radio" label="ACCESSIBILITY" description="ACCESSIBILITY_DESC" >
+		     	<!--<field name="accessibility" 		default="0" type="radio" label="ACCESSIBILITY" description="ACCESSIBILITY_DESC" >
 		     		<option value="1">JYES</option>
 		            <option value="0">JNO</option>
-		        </field>
+		        </field>-->
 		     	<field name="tidyRepair" 			default="0" type="radio" label="TIDY_REPAIR" description="TIDY_REPAIR_DESC" >
 		     		<option value="1">JYES</option>
 		            <option value="0">JNO</option>
 		        </field>
-		        <field name="spacer2" 				type="spacer" hr="true" label="" description="" />
+		        <!--<field name="spacer2" 				type="spacer" hr="true" label="" description="" />
 		     	<field name="frontend-tools" 		default="0" type="radio" label="FRONTEND_TOOLS" description="FRONTEND_TOOLS_DESC" >
 		     		<option value="1">JYES</option>
 		            <option value="0">JNO</option>
@@ -63,7 +63,7 @@
 		        <field name="blogConverter" 		default="0" type="radio" label="BLOG_CONVERTER" description="BLOG_CONVERTER_DESC" >
 		     		<option value="1">JYES</option>
 		            <option value="0">JNO</option>
-		        </field>
+		        </field>-->
 		        <field name="spacer4" 				type="spacer" hr="true" description="" />
 		     	<field name="getImages" 			default="0" type="radio" label="GET_IMAGES" description="GET_IMAGES_DESC" >
 		     		<option value="1">JYES</option>
