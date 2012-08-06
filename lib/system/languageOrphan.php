@@ -21,10 +21,12 @@ class AKLanguageOrphan {
 		$es		= AK::getEasySet();
 		
 		// get file
-		
 		$path 	= JPATH_ROOT.DS.$es->params->get('languageOrphanPath', 'logs/language.ini'); //'logs'.DS.'language.ini' ;
 		$path	= JPath::clean($path);
-		$file 	= JFile::read($path);
+		$file	= '';
+		
+		if(JFile::exists($path))
+			$file = JFile::read($path);
 		
 		// set ini into registry, then convert to object
 		$old	= new JRegistry();
@@ -89,9 +91,9 @@ class AKLanguageOrphan {
 		$ini = str_replace( '_errors=""' , '' , $ini );
 		$ini = str_replace( '_errors=' , '' , $ini );
 		
-		JPath::setPermission($path, 644, 755);
-		
-		if(is_writable($path))
+		//jimport('joomla.filesystem.path');
+		//JPath::setPermissions($path, 644, 755);
+		//if(is_writable($path))
 			@JFile::write( $path , $ini );
 	}
 	

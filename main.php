@@ -74,7 +74,6 @@ class plgSystemAsikart_easyset extends JPlugin
 	// =========================== Events ======================================
 	
 	public function onAfterInitialise() {
-		if( $this->params->get( 'cacheManagerEnabled' , 0 ) && $this->app->isSite() ) $this->getFunction( 'system.cacheManager' );
 		
 		$this->getFunction( 'doCmd' ) ;
 		if( $this->params->get( 'tranAlias' , 1 ) ) $this->getFunction( 'article.tranAlias' , $this );
@@ -101,6 +100,8 @@ class plgSystemAsikart_easyset extends JPlugin
 	public function onAfterRender() {
 		$this->getFunction( 'includes.insertHeader' );
 		$this->getFunction( 'includes.setStyle' );
+		
+		if( $this->params->get( 'cacheManagerEnabled' , 0 ) && $this->app->isSite() ) $this->getFunction( 'system.cacheManager' );
 		@include $this->includeEvent(__FUNCTION__);
 	}
 	

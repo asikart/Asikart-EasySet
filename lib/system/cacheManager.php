@@ -11,8 +11,9 @@ function cacheManager()
 	
 	$menus 	= JMenu::getInstance('site');
 	$uri 	= JFactory::getURI() ;
-	$bool 	= false ;
+	$bool 	= array() ;
 	
+	/*
 	// set Menu Itemid
 	$route = str_replace( JURI::root(), '', $uri->toString());
 	$route = str_replace( '.html', '', $route);
@@ -28,21 +29,26 @@ function cacheManager()
 	foreach( $actives as $active ):
 		if( in_array($active->id, $cache_menus) ){
 			$bool = true ;
+			break ;
 		}	
 	endforeach;
-	
+	*/
+	$itemid = JRequest::getVar('Itemid') ;
+	if( in_array($itemid, $cache_menus) ){
+		$bool[] = true ;
+	}	
 	
 	// queries control
 	$cache_queries = explode("\n", $cache_queries);
 	
-	if( $bool == false ):
+	//if( $bool == false ):
 	
 		foreach( $cache_queries as $q ):
-			$q = trim($q);
+			
 			$q = explode( '&', $q );
 			$r = false ;
 			foreach( $q as $v ):
-				$bool = false ;
+				$r = false ;
 				
 				if( strpos($v, '!=') ){
 					$v = explode('!=', $v) ;
@@ -52,13 +58,22 @@ function cacheManager()
 					if( JRequest::getVar(trim($v[0])) != trim($v[1]) ) break ;
 				}
 				
-				$bool = true ;
+				$r = true ;
 			endforeach;
 			
+			$bool[] = $r ? true : false ;
 		endforeach;
 	
-	endif ;
+	//endif ;
 	
+	$tmp = false ;
+	foreach( $bool as $v ):
+		if($v){
+			$tmp = true ;
+			break ;
+		}
+	endforeach;
+	$bool = $tmp ;
 	
 	// detach cache plugin
 	$dispatcher = JDispatcher::getInstance();
