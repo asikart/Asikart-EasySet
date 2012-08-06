@@ -3,7 +3,7 @@
 function setOpenGraph ( $context , $article , $es) {
 	
 	$view = JRequest::getVar( 'view' );
-	if( empty($article->id)) return ;
+	if( empty($article->id) ) return ;
 	
 	if( 'article' == $view ) :
 		

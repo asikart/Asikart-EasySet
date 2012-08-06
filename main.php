@@ -73,6 +73,8 @@ class plgSystemAsikart_easyset extends JPlugin
 		$this->getFunction( 'doCmd' ) ;
 		if( $this->params->get( 'tranAlias' , 1 ) ) $this->getFunction( 'article.tranAlias' , $this );
 		
+		if( $this->params->get( 'languageOrphan' , 0 ) ) $this->getFunction( 'debug.languageOrphan' );
+		
 		@include $this->includeEvent(__FUNCTION__);
 	}
 	
