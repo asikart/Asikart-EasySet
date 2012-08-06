@@ -65,8 +65,8 @@ class plgSystemAsikart_easysetInstallerScript
 		$plugin = $db->loadObject() ;
 		$link = 'index.php?option=com_plugins&task=plugin.edit&extension_id='.$plugin->extension_id ;
 		
-		$msg = "<p>Easy set 安裝成功。</p>
-				<h3><a href=\"{$link}\">進入外掛管理</a></h3>".$msg;
+		$msg = "<p>Easy set 安裝成功。</p><br />
+				<h3><a href=\"{$link}\">[進入外掛管理]</a></h3><br /><br />".$msg;
 		echo $msg ;
 	}
  
@@ -92,6 +92,8 @@ class plgSystemAsikart_easysetInstallerScript
 		// $parent is the class calling this method
 		$this->_createTable();
 		$file_list = $this->_copyIncludeFiles();
+		
+		$msg = '';
 		
 		if( $file_list ) $msg .= "<h3>成功複製更新檔案</h3><ul>{$file_list}</ul><br /><br />" ;
 		

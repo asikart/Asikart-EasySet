@@ -24,8 +24,8 @@
 .pane-slider{border:solid 0px;  padding:0px 10px !important;  margin:0;  background:url(../images/nav_level_1.gif) repeat-x;}
 
 /* BLOG LAYOUT */
-.ak_blog_img_wrap{width:20%;padding:0 15px 15px 0;text-align:center;}
-.ak_blog_intro{width:70%;padding:0 15px;}
+.ak_blog_img_wrap{padding:0 15px 15px 0;text-align:center;}
+.ak_blog_intro{padding:0 15px;}
 .asikart-fb-like{padding:15px 0; }
 
 /* Fade and Opacity */

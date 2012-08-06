@@ -52,7 +52,7 @@ function blogViewClearly( $context, $article, $params = null ){
 	if( $crop ):
 		$imageUrl 	= AK::thumb( $mainImg , $imgW , $imgW , $crop ) ;
 	else:
-		$imageUrl 	= AK::thumb( $mainImg , $imgW , '' , $crop ) ; ;
+		$imageUrl 	= AK::thumb( $mainImg , $imgW , 999 , 0 ) ; ;
 	endif;
 	
 	// Article Link
@@ -66,7 +66,7 @@ function blogViewClearly( $context, $article, $params = null ){
 					<img class="ak_blog_img" src="{$imageUrl}" alt="{$article->title}" width="{$imgW}px" />
 				</a>
 			</div>
-			<div class="ak_blog_intro fltlft float-left">
+			<div class="ak_blog_intro">
 				{$text}
 			</div>
 			<div class="clr clearfix"></div>

@@ -173,7 +173,7 @@ class plgSystemAsikart_easyset extends JPlugin
 		$result = array() ;
 		
 		if( 'com_categories.category' !== $context ):
-			if( $this->params->get( 'tidyRepair' , 1 ) ) $result[] = $this->getFunction( 'article.tidyRepair' , $article , $this );
+			if( $this->params->get( 'tidyRepair' , 1 ) ) $this->getFunction( 'article.tidyRepair' , $article , $this );
 		endif;
 		
 		@include $this->includeEvent(__FUNCTION__);
@@ -186,7 +186,7 @@ class plgSystemAsikart_easyset extends JPlugin
 	{
 		$result = array() ;
 		
-		if( $this->params->get( 'getImages' , 1 ) ) $result[] = $this->getFunction( 'article.saveImages' , $context , $article );
+		if( $this->params->get( 'getImages' , 1 ) ) $this->getFunction( 'article.saveImages' , $context , $article );
 		
 		@include $this->includeEvent(__FUNCTION__);
 

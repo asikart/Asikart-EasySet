@@ -13,7 +13,11 @@ class AKThumb
 		$path = self::getImagePath($url) ;
 		
 		$img = new JImage();
-		$img->loadFile($path);
+		
+		if(JFile::exists($path))
+			$img->loadFile($path);
+		else
+			return "http://placehold.it/{$width}x{$height}" ;
 		
 		// get Width Height
 		$imgdata = JImage::getImageFileProperties($path) ;
@@ -93,33 +97,31 @@ class AKThumb
 	
 	public function crop($img, $w, $h, $data)
 	{
-		$p = $w / $h ;
+		$p  = $w / $h ;
+		
 		$oH = $data->height ;
 		$oW = $data->width ;
+		$oP = $oW / $oH ;
 		
-		if( $h >= $w ){
+		$x = 0 ;
+		$y = 0 ;
+		
+		if($p > $oP) {
+			
+			$rW = $oW ;
+			$rH = $oW * $p ;
+			
+			$y = ( $oH - $rH ) / 2 ;
+			
+		}else{
+			
 			$rH = $oH ;
 			$rW = $oH * $p ;
 			
-			$x = 0 ;
-			$y = 0 ;
+			$x = ( $oW - $rW ) / 2 ;
 			
-			if( $oH > $oW )
-				$x = ( $oW - $rW ) / 2 ;
-			else
-				$y = ( $oH - $rH ) / 2 ;
-		}else{
-			$rW = $oW ;
-			$rH = $oW / $p ;
-			
-			$x = 0 ;
-			$y = 0 ;
-			
-			if( $oH > $oW )
-				$x = ( $oW - $rW ) / 2 ;
-			else
-				$y = ( $oH - $rH ) / 2 ;
 		}
+
 		
 		$img = $img->crop($rW, $rH, $x, $y);
 		return $img ;
