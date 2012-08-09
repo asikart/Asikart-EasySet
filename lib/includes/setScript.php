@@ -4,6 +4,7 @@ function setScript() {
 	
 	$doc 	= JFactory::getDocument();
 	$body 	= JResponse::getBody();
+	$app 	= JFactory::getApplication() ;
 	$es		= AK::getEasyset();
 	
 	if( $doc->getType() !== 'html' ) return ;
@@ -35,7 +36,7 @@ SCRIPT;
 	$doc->addCustomTag( $script ) ;
 	
 	//include jQuery
-	if( $es->params->get('includejQuery', 0) ){
+	if( $es->params->get('includejQuery', 0) && $app->isSite()){
 		if(JDEBUG){
 			$doc->addScript( AK_ADMIN_JS_URL.'/jquery/jquery-1.7.2.js' );
 		}else{
@@ -44,7 +45,7 @@ SCRIPT;
 	}
 	
 	// inculd bootstrap
-	if( $es->params->get('includeBootstrap', 0) ){
+	if( $es->params->get('includeBootstrap', 0) && $app->isSite()){
 		if(JDEBUG){
 			$doc->addStyleSheet(AK_ADMIN_CSS_URL.'/bootstrap/css/bootstrap.css');
 			$doc->addStyleSheet(AK_ADMIN_CSS_URL.'/bootstrap/css/bootstrap-responsive.css');
