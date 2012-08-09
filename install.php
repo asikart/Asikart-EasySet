@@ -170,7 +170,7 @@ class plgSystemAsikart_easysetInstallerScript
 			//return ;
 		
 		$sql = <<<SQL
-			CREATE TABLE  `#__content_images` (
+			CREATE TABLE IF NOT EXISTS `#__content_images` (
 			 `contentid` INT( 11 ) NOT NULL ,
 			 `catid` INT( 11 ) NOT NULL ,
 			 `url` VARCHAR( 255 ) NOT NULL ,

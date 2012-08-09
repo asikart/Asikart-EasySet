@@ -4,6 +4,7 @@ function setScript() {
 	
 	$doc 	= JFactory::getDocument();
 	$body 	= JResponse::getBody();
+	$es		= AK::getEasyset();
 	
 	if( $doc->getType() !== 'html' ) return ;
 	
@@ -33,5 +34,26 @@ SCRIPT;
 
 	$doc->addCustomTag( $script ) ;
 	
+	//include jQuery
+	if( $es->params->get('includejQuery', 0) ){
+		if(JDEBUG){
+			$doc->addScript( AK_ADMIN_JS_URL.'/jquery/jquery-1.7.2.js' );
+		}else{
+			$doc->addScript( AK_ADMIN_JS_URL.'/jquery/jquery-1.7.2.min.js' );
+		}
+	}
+	
+	// inculd bootstrap
+	if( $es->params->get('includeBootstrap', 0) ){
+		if(JDEBUG){
+			$doc->addStyleSheet(AK_ADMIN_CSS_URL.'/bootstrap/css/bootstrap.css');
+			$doc->addStyleSheet(AK_ADMIN_CSS_URL.'/bootstrap/css/bootstrap-responsive.css');
+			$doc->addScript( AK_ADMIN_CSS_URL.'/bootstrap/js/bootstrap.js' );
+		}else{
+			$doc->addStyleSheet(AK_ADMIN_CSS_URL.'/bootstrap/css/bootstrap.min.css');
+			$doc->addStyleSheet(AK_ADMIN_CSS_URL.'/bootstrap/css/bootstrap-responsive.min.css');
+			$doc->addScript( AK_ADMIN_CSS_URL.'/bootstrap/js/bootstrap.min.js' );
+		}
+	}
 }
 

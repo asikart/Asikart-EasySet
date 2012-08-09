@@ -25,15 +25,19 @@
     <config>
 		<fields name="params">
 			<fieldset name="basic">
-				<!--<field name="insertjQuery" 			default="0" type="radio" label="INSERT_JQUERY" description="INSERT_JQUERY_DESC" >
+				<field name="includejQuery" 			default="0" type="radio" label="INCLUDE_JQUERY" description="INCLUDE_JQUERY_DESC" >
 		        	<option value="1">JYES</option>
 		            <option value="0">JNO</option>
 		        </field>
-		     	<field name="insertjQueryFromGoogle" default="0" type="radio" label="INSERT_FROM_GOOGLE" description="INSERT_FROM_GOOGLE_DESC" >
+				<field name="includeBootstrap" 			default="0" type="radio" label="INCLUDE_BOOTSTRAP" description="INCLUDE_BOOTSTRAP_DESC" >
+		        	<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+		     	<!--<field name="insertjQueryFromGoogle" default="0" type="radio" label="INCLUDE_FROM_GOOGLE" description="INCLUDE_FROM_GOOGLE_DESC" >
 		     		<option value="1">JYES</option>
 		            <option value="0">JNO</option>
 		        </field>
-		        <field name="insertjQueryPath" 		default="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text" label="INSERT_JQUERY_PATH" description="INSERT_JQUERY_PATH_DESC" />
+		        <field name="insertjQueryPath" 		default="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text" label="INCLUDE_JQUERY_PATH" description="INCLUDE_JQUERY_PATH_DESC" />
 		        <field name="removeMootools" default="0" type="radio" label="REMOVE_MOOTOOLS" description="REMOVE_MOOTOOLS_DESC" >
 		     		<option value="1">JYES</option>
 		            <option value="0">JNO</option>
@@ -115,7 +119,7 @@
 		     	<field name="maxMetaChar" 			default="250" type="text" label="MAX_META_CHAR" description="MAX_META_CHAR_DESC" />
 		     	<field name="generator" 			type="text" label="GENERATOR" description="GENERATOR_DESC" />
 		     	<field default="" type="spacer" hr="true" />
-		     	<field name="insertHeader" 			type="codemirror" filter="raw" default="" label="INSERT_HEADER" description="INSERT_HEADER_DESC" />
+		     	<field name="insertHeader" 			type="codemirror" filter="raw" default="" label="INCLUDE_HEADER" description="INCLUDE_HEADER_DESC" />
 			</fieldset>
 			<fieldset name="SOCIAL">
 				<field name="openGraph" type="radio" default="0" label="OG" description="OG_DESC">
@@ -148,10 +152,10 @@
 			<fieldset name="CODE_INSERT" addfieldpath="/plugins/system/asikart_easyset/fields">
 				<field name="inputCodeBase" type="text" default="" label="INPUT_CODE_BASE" description="INPUT_CODE_BASE_DESC" />
 				<field type="spacer" hr="true" description="" />
-				<field name="insertArticleTop" type="codemirror" filter="raw" default="" label="INSERT_ARTICLE_TOP" description="INSERT_ARTICLE_TOP_DESC" />
-				<field name="insertTitleBottom" type="codemirror" filter="raw" default="" label="INSERT_TITLE_BOTTOM" description="INSERT_TITLE_BOTTOM_DESC" />
-				<field name="insertContentTop" type="codemirror" filter="raw" default="" label="INSERT_CONTENT_TOP" description="INSERT_CONTENT_TOP_DESC" />
-				<field name="insertContentBottom" type="codemirror" filter="raw" default="" label="INSERT_CONTENT_BOTTOM" description="INSERT_CONTENT_BOTTOM_DESC" />
+				<field name="insertArticleTop" type="codemirror" filter="raw" default="" label="INCLUDE_ARTICLE_TOP" description="INCLUDE_ARTICLE_TOP_DESC" />
+				<field name="insertTitleBottom" type="codemirror" filter="raw" default="" label="INCLUDE_TITLE_BOTTOM" description="INCLUDE_TITLE_BOTTOM_DESC" />
+				<field name="insertContentTop" type="codemirror" filter="raw" default="" label="INCLUDE_CONTENT_TOP" description="INCLUDE_CONTENT_TOP_DESC" />
+				<field name="insertContentBottom" type="codemirror" filter="raw" default="" label="INCLUDE_CONTENT_BOTTOM" description="INCLUDE_CONTENT_BOTTOM_DESC" />
 				<field type="spacer" hr="true" description="" />
 				<field name="showOnBlog" type="radio" default="1" label="SHOW_ON_BLOG" description="SHOW_ON_BLOG_DESC" >
 					<option value="1">JYES</option>
@@ -165,7 +169,7 @@
 					<option value="0">JNO</option>
 				</field>
 				<field name="languageOrphanPath" type="text" default="logs/language.ini" size="30" label="LANGUAGE_ORPHAN_PATH" description="LANGUAGE_ORPHAN_PATH_DESC" />
-				<field name="" 				type="spacer" hr="true" description="" />
+				<field type="spacer" hr="true" description="" />
 				<field name="cacheManagerEnabled" type="radio" default="0" label="CACHE_MANAGER_ENABLED" description="CACHE_MANAGER_ENABLED_DESC" >
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
