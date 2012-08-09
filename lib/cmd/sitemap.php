@@ -6,6 +6,7 @@ JRequest::setVar( 'format' , 'xml' , 'method' , true ) ;
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument(); 
 $exists_links  = array();
+$date = JFactory::getDate( 'now' , JFactory::getConfig()->get('offset') ) ;
 
 // get XML parser
 $xml = simplexml_load_string( '<?xml version="1.0" encoding="utf-8"?'.'>
@@ -14,7 +15,7 @@ $xml = simplexml_load_string( '<?xml version="1.0" encoding="utf-8"?'.'>
 // set frontpage
 $url = $xml->addChild( 'url' );
 $url->addChild( 'loc'		, JURI::root() 	) ;
-$url->addChild( 'lastmod'	, '' 			) ;
+$url->addChild( 'lastmod'	, $date->format('Y-m-d')) ;
 $url->addChild( 'changefreq', 'daily' 		) ;
 $url->addChild( 'priority'	, '0.9' 		) ;
 
@@ -39,7 +40,7 @@ foreach( $menus as $menu ):
 	// set xml data
 	$url = $xml->addChild( 'url' );
 	$url->addChild( 'loc'		, $link 	) ;
-	$url->addChild( 'lastmod'	, '' 			) ;
+	$url->addChild( 'lastmod'	, $date->format('Y-m-d')) ;
 	$url->addChild( 'changefreq', 'weekly' 		) ;
 	$url->addChild( 'priority'	, '0.8' 		) ;
 	
@@ -60,11 +61,13 @@ foreach( $cats as $cat ):
 	
 	// set some data
 	$modified = ( $cat->modified_time != '0000-00-00 00:00:00' ) ? $cat->modified_time : $cat->created_time ;
+	$modified = JFactory::getDate( $modified , JFactory::getConfig()->get('offset') ) ;
+	$modified = $modified->format('Y-m-d');
 	
 	// set xml data
 	$url = $xml->addChild( 'url' );
 	$url->addChild( 'loc'		, $link 	) ;
-	$url->addChild( 'lastmod'	, $cat->modified_time ) ;
+	$url->addChild( 'lastmod'	, $modified ) ;
 	$url->addChild( 'changefreq', 'weekly' 	) ;
 	$url->addChild( 'priority'	, '0.7' 	) ;
 	
@@ -87,6 +90,8 @@ foreach( $contents as $content ):
 	
 	// set some data
 	$modified = ( $content->modified != '0000-00-00 00:00:00' ) ? $content->modified : $content->created ;
+	$modified = JFactory::getDate( $modified , JFactory::getConfig()->get('offset') ) ;
+	$modified = $modified->format('Y-m-d');
 	
 	// set xml data
 	$url = $xml->addChild( 'url' );
