@@ -28,7 +28,7 @@ function addFbLikeButton ($context, $article) {
 LIKE;
 	
 	
-	$get = JRequest::get('get');
+	$get = JRequest::get();
 	
 	if( JRequest::getVar('view') == 'featured' || JRequest::getVar('layout') == 'blog' ) {
 		

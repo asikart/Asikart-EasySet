@@ -1,9 +1,12 @@
 <?php
 
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
 jimport('joomla.plugin.plugin');
 
 class plgSystemAsikart_easyset extends JPlugin
 {
+	static public $instance ;
 	
 	public $app 		;
 	
@@ -25,51 +28,15 @@ class plgSystemAsikart_easyset extends JPlugin
 	 * @param       array   $config  An array that holds the plugin configuration
 	 * @since       1.6
 	 */
-    public function __construct(& $subject, $config)
+    public function __construct(&$subject, $config)
     {
 		parent::__construct( $subject, $config );
 		$this->loadLanguage();
-		$this->app = JFactory::getApplication();
+		$this->app 	= JFactory::getApplication();
+		self::$instance = $this ;
     }
     
-	public function callFunction( $func ) {
-		return $this->getFunction( $func );
-	}
 	
-    public function getFunction( $func ) {
-		$func_name = explode( '.' , $func );
-		$func_name = array_pop($func_name);
-		$func_path = str_replace( '.' , DS , $func );
-		
-		if( !function_exists ( $func_name ) ) :			
-			$file = AK_PATH.DS.$func_path.'.php' ;
-			
-			if( !file_exists($file) ) 
-				$file = AK_ADMIN_LIB_PATH.DS.$func_path.'.php' ;
-			
-			if( file_exists($file) ) 
-				include_once( $file ) ;
-		endif;
-		
-		$args = func_get_args();
-        array_shift( $args );
-        
-		if( function_exists ( $func_name ) )
-			return call_user_func_array( $func_name , $args );
-	}
-	
-	public function includeEvent($func) {
-		$event = AK_PATH.DS.'events'.DS.$func.'.php' ;
-		if(file_exists( $event )) return $event ;
-	}
-	
-	public function resultBool($result = array()) {
-		foreach( $result as $result ):
-			if(!$result) return false ;
-		endforeach;
-		
-		return true ;
-	}
 	
 	// =========================== Events ======================================
 	
@@ -223,5 +190,107 @@ class plgSystemAsikart_easyset extends JPlugin
 		return $this->resultBool($result);
 	}
 	
+	
+	
+	// Utilities
+	// ================================================================================
+	
+	public function getInstance()
+	{
+		if( plgSystemAsikart_easyset::$instance ){
+			return plgSystemAsikart_easyset::$instance;
+		}
+	}
+	
+	
+	public function callFunction( $func )
+	{
+		return $this->getFunction( $func );
+	}
+	
+	
+	
+	/**
+	 * function call
+	 * 
+	 * A proxy to call class and functions
+	 * Example: $this->call('folder1.folder2.function', $args) ; OR $this->call('folder1.folder2.Class::function', $args)
+	 * 
+	 * @param	string	$uri	The class or function file path.
+	 * 
+	 */
+	
+	public function getFunction( $uri ) {
+		// Split paths
+		$uri 	= explode( '::', $uri );
+		$path 	= explode( '.', $uri[0] );
+		
+		
+		if(isset($uri[1])){
+			$class 		= array_pop($path) ;
+			$function 	= $uri[1] ;
+			$file 		= $class ;
+		}else{
+			$function 	= array_pop($path) ;
+			$file		= $function ;
+		}
+		
+		$func_path 		= implode(DS, $path).DS.$file;
+		$file 			= AK_PATH.DS.$func_path.'.php';
+		
+		
+		// include file.
+		if(!empty($class)){
+			if(!class_exists($class)){
+				if( !file_exists($file) ) {
+					$file = AK_ADMIN_LIB_PATH.DS.$func_path.'.php' ;
+				}
+				
+				if( file_exists($file) ) {
+					include_once( $file ) ;
+				}
+			}
+		}else{
+			if(!function_exists ( $function )){
+				if( !file_exists($file) ) {
+					$file = AK_ADMIN_LIB_PATH.DS.$func_path.'.php' ;
+				}
+				
+				if( file_exists($file) ) {
+					include_once( $file ) ;
+				}
+			}
+		}
+		
+		
+		// Handle args
+		$args = func_get_args();
+        array_shift( $args );
+        
+		// Call Function
+		if(!empty($class) && method_exists( $class, $function )){
+			return call_user_func_array( array( $class, $function ) , $args );
+		}elseif(function_exists ( $function )){
+			return call_user_func_array( $function , $args );
+		}
+		
+	}
+	
+	
+	public function includeEvent($func)
+	{
+		$event = AK_PATH.DS.'events'.DS.$func.'.php' ;
+		if(file_exists( $event )) return $event ;
+	}
+	
+	
+	public function resultBool($result = array())
+	{
+		foreach( $result as $result ):
+			if(!$result) return false ;
+		endforeach;
+		
+		return true ;
+	}
 }
 

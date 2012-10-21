@@ -25,11 +25,11 @@ function setStyle() {
 	$style = "\n" ;
 	
 	if( AK::_( 'app.isSite' ) ):
-		$style .= '<link rel="stylesheet" href="'.AK_ADMIN_CSS_URL.'/system.css" type="text/css" />'."\n";
+		if(JVERSION < 3.0) $style .= '<link rel="stylesheet" href="'.AK_ADMIN_CSS_URL.'/system.css" type="text/css" />'."\n";
 		$style .= '<link rel="stylesheet" href="'.AK_CSS_URL.'/custom-typo.css" type="text/css" />'."\n";
 		$style .= '<link rel="stylesheet" href="'.AK_CSS_URL.'/custom.css" type="text/css" />'."\n";
 	else:
-		$style .= '<link rel="stylesheet" href="'.AK_ADMIN_CSS_URL.'/system.css" type="text/css" />'."\n";
+		if(JVERSION < 3.0) $style .= '<link rel="stylesheet" href="'.AK_ADMIN_CSS_URL.'/system.css" type="text/css" />'."\n";
 		$style .= '<link rel="stylesheet" href="'.AK_CSS_URL.'/custom-admin.css" type="text/css" />'."\n";
 	endif;
 	

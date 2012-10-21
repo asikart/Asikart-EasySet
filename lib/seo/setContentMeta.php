@@ -19,7 +19,7 @@ function setContentMeta ( $article , $easyset ) {
 	// get meta
 	if( AKHelper::isHome() ):
 	
-		$easyset->_metaDesc = $config->getValue('MetaDesc');
+		$easyset->_metaDesc = $config->get('MetaDesc');
 		
 	elseif( $metaDesc ):
 	
@@ -52,7 +52,8 @@ function setContentMeta ( $article , $easyset ) {
 	
 	// save article and category data to easyset
 	$view 	= JRequest::getVar( 'view' ) ;
-	include_once JPath::clean(JPATH_ROOT.'/libraries/joomla/database/table/category.php') ;
+	$cat_table = JPath::clean(JPATH_ROOT.'/libraries/joomla/database/table/category.php');
+	if(JFile::exists($cat_table)) include_once $cat_table ;
 	$cat 	= JTable::getInstance( 'Category' );
 	
 	if( 'category' == $view || 'categories' == $view ):

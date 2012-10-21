@@ -8,7 +8,7 @@ function setDocument( $easyset ) {
 	if($doc->getType() != 'html' ) return ;
 	
 	$config 	= JFactory::getConfig();
-	$siteName	=  $config->getValue('sitename');
+	$siteName	=  $config->get('sitename');
 	
 	//$easyset->_metaDesc = $doc->getBuffer('component' , '') ;
 	//$easyset->_metaDesc = strip_tags( $easyset->_metaDesc );

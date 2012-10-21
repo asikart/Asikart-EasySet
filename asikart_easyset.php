@@ -2,12 +2,14 @@
 //
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
+define('DS', DIRECTORY_SEPARATOR) ;
+
 $akpath 	= JPATH_ROOT.DS.'easyset' ;
 $akurl		= JURI::root().'easyset/' ;
 
 $akadmin_path 	= JPATH_PLUGINS.DS.'system'.DS.'asikart_easyset' ;
 $akadmin_url	= JURI::root().'plugins/system/asikart_easyset' ;
-$mainfile 	= $akadmin_path.DS.'main.php';
+$mainfile 		= $akadmin_path.DS.'main.php';
 
 define('AK_PATH' 		, $akpath );
 define('AK_CMD_PATH'	, AK_PATH.DS.'cmd');
@@ -27,22 +29,7 @@ define('AK_THUMB_PATH'		, JPATH_ROOT.DS.'cache'.DS.'thumbs');
 define('AK_THUMBTEMP_PATH'	, AK_THUMB_PATH.DS.'temp');
 define('AK_THUMBCACHE_PATH', AK_THUMB_PATH.DS.'cache');
 define('AK_THUMBCACHE_URL'	, JURI::root().'cache/thumbs/cache');
-/*
-$mainfile = $akpath.DS.'main.php' ;
-if( !file_exists($mainfile) ) {
-	$akpath = JPATH_PLUGINS.DS.'system'.DS.'asikart_easyset' ;
-	$akurl	= JURI::root().'plugins/system/asikart_easyset' ;
-	$mainfile 	= $akpath.DS.'main.php';
-}
 
-define('AK_PATH' 		, $akpath );
-define('AK_LIB_PATH'	, AK_PATH.DS.'lib');
-define('AK_CMD_PATH'	, AK_LIB_PATH.DS.'cmd');
-define('AK_URL'			, $akurl);
-define('AK_JS_URL'		, AK_URL.'js/');
-define('AK_THUMB_URL'	, AK_URL.'lib/timthumb.php');
-define('AK_THUMBTEMP_URL'	, AK_URL.'imgs/thumbs/');
-*/
 
 // load AKHelper
 if( !class_exists( 'AKHelper' ) ) include_once ( AK_ADMIN_LIB_PATH.DS.'akhelper'.DS.'akhelper.init.php' );
@@ -51,5 +38,5 @@ if( !class_exists( 'AKHelper' ) ) include_once ( AK_ADMIN_LIB_PATH.DS.'akhelper'
 jimport( 'joomla.filesystem.file' );
 jimport( 'joomla.filesystem.folder' );
 
-// load Eastset
+// load Easyset
 include_once ( $mainfile );

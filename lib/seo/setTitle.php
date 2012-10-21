@@ -4,7 +4,7 @@ function setTitle() {
 	$easyset	= AK::getEasyset();
 	$doc 		= JFactory::getDocument();
 	$config 	= JFactory::getConfig();
-	$siteName	= $config->getValue('sitename');
+	$siteName	= $config->get('sitename');
 	$view 		= JRequest::getVar( 'view' ) ;
 	$title		= $doc->getTitle();
 	

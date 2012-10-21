@@ -13,7 +13,10 @@ function setScript() {
 	$doc->addScript( AK_JS_URL.'/easyset-custom.js' );
 	
 	$root = JURI::root() ;
-		
+	
+	$smoothScroll = $es->params->get('smoothScroll', 0) ;
+	$smoothScroll = $smoothScroll ? 'true' : 'false' ;
+	
 	$script = 
 <<<SCRIPT
 	<script type="text/javascript">
@@ -22,7 +25,7 @@ function setScript() {
 				"opacityEffect" : true ,
 				"foldContent" 	: true ,
 				"fixingElement" : true ,
-				"smoothScroll"	: true
+				"smoothScroll"	: {$smoothScroll}
 						} ;
 		var akconfig = new Object();
 		akconfig.root = '{$root}' ;
