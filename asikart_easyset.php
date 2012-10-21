@@ -2,7 +2,9 @@
 //
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-define('DS', DIRECTORY_SEPARATOR) ;
+if(JVERSION >= 3.0){
+	define('DS', DIRECTORY_SEPARATOR) ;
+}
 
 $akpath 	= JPATH_ROOT.DS.'easyset' ;
 $akurl		= JURI::root().'easyset/' ;
