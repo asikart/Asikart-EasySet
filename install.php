@@ -78,7 +78,7 @@ class plgSystemAsikart_easysetInstallerScript
 	function uninstall($parent) 
 	{
 		// $parent is the class calling this method
-		echo '<p>' . JText::_('COM_HELLOWORLD_UNINSTALL_TEXT') . '</p>';
+		//echo '<p>' . JText::_('COM_HELLOWORLD_UNINSTALL_TEXT') . '</p>';
 		
 	}
  
@@ -145,7 +145,85 @@ class plgSystemAsikart_easysetInstallerScript
 CSS;
 		
 		echo $css ;
-		include_once $path.'/windwalker/admin/installscript.php' ;
+		
+		
+		
+		// Show Installed table
+		// ========================================================================
+		include_once $path.'/windwalker/html/grid.php';
+		$grid = new AKGrid();
+		
+		$option['class'] = 'adminlist table table-striped table-bordered' ;
+		$option['style'] = JVERSION >=3 ? 'width: 750px;' : 'width: 80%; margin: 15px;' ;
+		$grid->setTableOptions($option);
+		$grid->setColumns( array('num', 'type', 'name', 'version', 'state', 'info') ) ;
+		
+		$grid->addRow(array(), 1) ;
+		$grid->setRowCell('num', '#' , array());
+		$grid->setRowCell('type', JText::_('COM_INSTALLER_HEADING_TYPE') , array());
+		$grid->setRowCell('name', JText::_('COM_INSTALLER_HEADING_NAME') , array());
+		$grid->setRowCell('version', JText::_('JVERSION') , array());
+		$grid->setRowCell('state', JText::_('JSTATUS') , array());
+		$grid->setRowCell('info', JText::_('COM_INSTALLER_MSG_DATABASE_INFO') , array());
+		
+		
+		// Set cells
+		$i = 0 ;
+		
+		if(JVERSION >= 3){
+			$tick 	= '<i class="icon-publish"></i>' ;
+			$cross 	= '<i class="icon-unpublish"></i>' ;
+		}else{
+			$tick 	= '<img src="templates/bluestork/images/admin/tick.png" alt="Success" />' ;
+			$cross 	= '<img src="templates/bluestork/images/admin/publish_y.png" alt="Fail" />' ;
+		}
+		
+		$td_class = array('style' => 'text-align:center;') ;
+		
+		
+		// Set component install success info
+		$grid->addRow(array( 'class' => 'row'.($i % 2) )) ;
+		$grid->setRowCell('num', ++$i , $td_class);
+		$grid->setRowCell('type', JText::_('COM_INSTALLER_TYPE_PLUGIN') , $td_class);
+		$grid->setRowCell('name', JText::_(strtoupper($manifest->name)) , array());
+		$grid->setRowCell('version', $manifest->version , $td_class);
+		$grid->setRowCell('state', $tick , $td_class);
+		$grid->setRowCell('info', '', array());
+		
+		
+		
+		// Install WindWalker
+		// ========================================================================
+		// Do install
+		$installer 		= new JInstaller();
+		$install_path 	= $path.'/windwalker';
+		if($result[] = $installer->install($install_path)){
+			$status = $tick ;
+		}else{
+			$status = $cross ;
+		}
+		// Set success table
+		$grid->addRow(array( 'class' => 'row'.($i % 2) )) ;
+		$grid->setRowCell('num', ++$i , $td_class);
+		$grid->setRowCell('type', JText::_('COM_INSTALLER_TYPE_LIBRARY') , $td_class);
+		$grid->setRowCell('name', JText::_('LIB_WINDWALKER') , array());
+		$grid->setRowCell('version', $installer->manifest->version , $td_class);
+		$grid->setRowCell('state', $status , $td_class);
+		$grid->setRowCell('info', JText::_($installer->manifest->description), array());
+		
+		
+		// Render install information
+		/*
+		echo '<h1>'.JText::_(strtoupper($manifest->name)).'</h1>' ;
+		$img = JURI::base().'/components/'.strtolower($manifest->name).'/images/'.strtolower($manifest->name).'_logo.png' ;
+		$img = JHtml::_('image', $img, 'LOGO' ) ;
+		$link = JRoute::_("index.php?option=".$manifest->name);
+		echo '<div id="ak-install-img">'.JHtml::link($link, $img).'</div>';
+		echo '<div id="ak-install-msg">'.JText::_( strtoupper($manifest->name).'_INSTALL_MSG' ).'</div>';
+		echo '<br /><br />';
+		*/
+		
+		echo $grid ;
 	}
 	
 	function _copyIncludeFiles(){
