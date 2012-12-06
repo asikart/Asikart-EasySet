@@ -27,8 +27,8 @@ class plgSystemAsikart_easysetInstallerScript
 		$this->_createTable();
 		
 		//JFolder::copy( JPATH_PLUGINS.DS.'system'.DS.'asikart_easyset' , JPATH_ROOT.DS.'easyset' , '' , true );
-		JFolder::create( JPATH_ROOT.DS.'easyset' );
-		JFolder::create( JPATH_ROOT.DS.'easyset'.DS.'cmd' );
+		JFolder::create( JPATH_ROOT.'/easyset' );
+		JFolder::create( JPATH_ROOT.'/easyset/cmd' );
 		
 		/*
 		$array = array();
