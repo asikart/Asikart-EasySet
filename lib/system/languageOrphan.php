@@ -18,7 +18,7 @@ class AKLanguageOrphan {
 		$lang 	= JFactory::getLanguage();
 		$orphans= $lang->getOrphans();
 		$used 	= $lang->getUsed() ;
-		$es		= AK::getEasySet();
+		$es		= AKEasyset::getInstance();
 		
 		// get file
 		$path 	= JPATH_ROOT.DS.$es->params->get('languageOrphanPath', 'logs/language.ini'); //'logs'.DS.'language.ini' ;

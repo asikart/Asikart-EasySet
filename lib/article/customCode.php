@@ -2,7 +2,7 @@
 
 function customCode( $position , $prepareContent = false , $article = null ) {
 	
-	$es = AK::getEasyset() ;
+	$es = AKEasyset::getInstance() ;
 	
 	// generate code output
 	$fileContent 	= $es->params->get( $position , '' );

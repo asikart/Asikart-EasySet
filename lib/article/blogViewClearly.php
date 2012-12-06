@@ -6,7 +6,7 @@ function blogViewClearly( $context, $article, $params = null ){
 	   JRequest::getVar( 'view' ) != 'featured')
 		return ;
 	
-	$es 		= AK::getEasySet();	
+	$es 		= AKEasyset::getInstance();	
 	$imgW 		= $es->params->get( 'blogViewImgWidth' , 150 );
 	$maxChar 	= $es->params->get( 'blogViewMaxChar' , 250 );
 	$crop 		= $es->params->get( 'blogViewImgCrop' , 1 );
@@ -50,13 +50,13 @@ function blogViewClearly( $context, $article, $params = null ){
 	
 	// Handle Image
 	if( $crop ):
-		$imageUrl 	= AK::thumb( $mainImg , $imgW , $imgW , $crop ) ;
+		$imageUrl 	= AK::_('thumb.resize',  $mainImg , $imgW , $imgW , $crop ) ;
 	else:
-		$imageUrl 	= AK::thumb( $mainImg , $imgW , 999 , 0 ) ; ;
+		$imageUrl 	= AK::_('thumb.resize',  $mainImg , $imgW , 999 , 0 ) ; ;
 	endif;
 	
 	// Article Link
-	$link = AK::getArticleLink( $article->id , $article->catid , 0 );
+	$link = AK::_('jcontent.getArticleLink',  $article->id , $article->catid , 0 );
 	
 	// Set layout
 	$layout = <<<LAYOUT

@@ -2,7 +2,7 @@
 
 function insertContentTop() {
 	
-	$es = AK::getEasyset() ;
+	$es = AKEasyset::getInstance() ;
 	
 	$fileContent 	= $es->params->get( 'insertContentTop' , '' );
 	$fileName 		= JPATH_ROOT.DS.'tmp'.DS.'easyset'.DS.'code'.DS.md5(__FUNCTION__) ;

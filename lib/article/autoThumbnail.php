@@ -6,7 +6,7 @@ function autoThumbnail( $context, $article, $params = null ){
 	
 	$minimal = 30 ;
 	
-	$es = AK::getEasySet();
+	$es = AKEasyset::getInstance();
 	$es->getFunction( 'dom.simple_html_dom' );
 	
 	$html = str_get_html($article->text);
@@ -37,7 +37,7 @@ function autoThumbnail( $context, $article, $params = null ){
 		if( $oriW <= $minimal || $oriH <= $minimal ) 	continue ; // if too small, skip.
 		if( $oriW <= $imgW || $oriW <= $imgW ) 			continue ; // If large ten origin, skip.
 
-		$img->src = AK::thumb( $imgUrl , $imgW, $imgH,0 ) ; // get thumb url
+		$img->src = AK::_('thumb.resize',  $imgUrl , $imgW, $imgH,0 ) ; // get thumb url
 		
 		$imgtext = $img->outertext ;
 		$imgtext = <<<ANCHOR

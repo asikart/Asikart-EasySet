@@ -20,6 +20,7 @@ class plgSystemAsikart_easyset extends JPlugin
 	
 	public $ogImage		;
 	
+	
 	/**
 	 * Constructor
 	 *
@@ -57,7 +58,7 @@ class plgSystemAsikart_easyset extends JPlugin
 	
 	
 	public function onAfterDispatch() {
-		if( $this->params->get( 'getMeta' , 1 ) ) $this->getFunction( 'seo.setDocument' , $this );
+		$this->getFunction( 'seo.setDocument' , $this );
 		$this->getFunction( 'includes.setScript' );
 		
 		@include $this->includeEvent(__FUNCTION__);
@@ -75,7 +76,8 @@ class plgSystemAsikart_easyset extends JPlugin
 	
 	public function onContentPrepare($context, &$article, &$params, $page = 0) {
 		// getMeta
-		if( $this->params->get( 'getMeta' , 1 ) ) $this->getFunction( 'seo.setContentMeta' , $article , $this );
+		//if( $this->params->get( 'getMeta' , 1 ) )
+		$this->getFunction( 'seo.setContentMeta' , $article , $this );
 		
 		// openGraph
 		if( $this->params->get( 'openGraph' , 1 ) ) $this->getFunction( 'seo.setOpenGraph' , $context , $article , $this );
@@ -291,6 +293,20 @@ class plgSystemAsikart_easyset extends JPlugin
 		endforeach;
 		
 		return true ;
+	}
+}
+
+
+
+class AKEasyset {
+	/*
+	 * function getEasyset
+	 * @param 
+	 */
+	
+	public static function getInstance()
+	{
+		return plgSystemAsikart_easyset::$instance ;
 	}
 }
 

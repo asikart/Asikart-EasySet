@@ -5,7 +5,7 @@ function setScript() {
 	$doc 	= JFactory::getDocument();
 	$body 	= JResponse::getBody();
 	$app 	= JFactory::getApplication() ;
-	$es		= AK::getEasyset();
+	$es		= AKEasyset::getInstance();
 	
 	if( $doc->getType() !== 'html' ) return ;
 	

@@ -6,8 +6,20 @@ function setOpenGraph ( $context , $article , $es) {
 	if( empty($article->id) ) return ;
 	
 	if( 'article' == $view ) :
-		
-		$img = AK::getArticleImages($article->id , 1);
+		$images = new JRegistry($article->images);
+		$img = $images->get('image_fulltext', $images->get('image_intro'));
+		if(!$img) {
+			$es = AKEasyset::getInstance();
+			$es->getFunction( 'dom.simple_html_dom' );
+			
+			// If first image = main image, delete this paragraph.
+			$html = str_get_html ( $article->text ) ;
+			$imgs = $html->find( 'img' );
+			
+			if(!empty($imgs[0])) {
+				$img = $imgs[0]->src ;
+			}
+		}
 		
 		$cat = JTable::getInstance( 'category' );
 		$cat->load( $article->catid ) ;
@@ -15,14 +27,14 @@ function setOpenGraph ( $context , $article , $es) {
 		
 		$catimg = $cat->params->get( 'image' );
 		
-		if( isset($img->url) ) {
-			$es->ogImage = $img->url ;
+		if( isset($img) ) {
+			$es->ogImage = $img ;
 		}elseif( $catimg ){
-			$es->ogImage = AK::pathAddHost($catimg) ;
+			$es->ogImage = AK::_('uri.pathAddHost', $catimg) ;
 			
 		}else{
 			if(!$es->params->get( 'ogDefaultImageOnlyFrontPage' , 1 ))
-				$es->ogImage = AK::pathAddHost($es->params->get( 'ogDefaultImage' )) ;
+				$es->ogImage = AK::_('uri.pathAddHost', $es->params->get( 'ogDefaultImage' )) ;
 		}
 		
 	elseif( 'category' == $view ):
@@ -42,7 +54,7 @@ function setOpenGraph ( $context , $article , $es) {
 				$es->ogImage = $es->params->get( 'ogDefaultImage' ) ;
 			}
 			
-			$es->ogImage = AK::pathAddHost( $es->ogImage );
+			$es->ogImage = AK::_('uri.pathAddHost',  $es->ogImage );
 		}
 		
 		$once = 0 ;

@@ -4,7 +4,7 @@ function insertHeader() {
 	$doc = JFactory::getDocument();
 	if( $doc->getType() !== 'html' ) return ;
 	
-	$es = AK::getEasyset();
+	$es = AKEasyset::getInstance();
 
 	$body = JResponse::getBody();
 

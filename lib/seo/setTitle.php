@@ -1,7 +1,7 @@
 <?php
 
 function setTitle() {
-	$easyset	= AK::getEasyset();
+	$easyset	= AKEasyset::getInstance();
 	$doc 		= JFactory::getDocument();
 	$config 	= JFactory::getConfig();
 	$siteName	= $config->get('sitename');
@@ -13,7 +13,7 @@ function setTitle() {
 	$title = $title[0] ;
 		
 	if( AKHelper::isHome() ):
-		$easyset->_siteTitle 	= $config->getValue('sitename');
+		$easyset->_siteTitle 	= $config->get('sitename');
 	else:
 		$separator = trim($easyset->params->get('titleSeparator'));
 		

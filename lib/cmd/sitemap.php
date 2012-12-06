@@ -21,9 +21,19 @@ $url->addChild( 'priority'	, '0.9' 		) ;
 
 
 // build menu map
-$sql = "SELECT * FROM #__menu 
-		WHERE id != 1 AND published=1 AND access=1 ;" ;
-$menus = AK::_( 'db.loadObjectList' , $sql );
+
+$db = JFactory::getDbo();
+$q = $db->getQuery(true) ;
+
+$q->select("*")
+	->from("#__menu")
+	->where("id != 1")
+	->where("published=1")
+	->where("access=1")
+	;
+
+$db->setQuery($q);
+$menus = $db->loadObjectList();
 
 foreach( $menus as $menu ):
 	if( !$menu->link ) continue;
@@ -49,14 +59,24 @@ endforeach;
 
 
 // build category map
-$sql = "SELECT * FROM #__categories 
-		WHERE id != 1 AND extension = 'com_content' AND published=1 AND access=1 ;" ;
-$cats = AK::_( 'db.loadObjectList' , $sql );
+$q = $db->getQuery(true) ;
+
+$q->select("*")
+	->from("#__categories")
+	->where("id != 1")
+	->where("published=1")
+	->where("access=1")
+	->where("extension = 'com_content'")
+	;
+
+$db->setQuery($q);
+$cats = $db->loadObjectList();
+
 
 foreach( $cats as $cat ):
 	
 	// get category link
-	$link = AK::_( 'content.getCategoryLink' , $cat->id , true ) ;
+	$link = AK::_( 'jcontent.getCategoryLink' , $cat->id , true ) ;
 	if( in_array( $link , $exists_links ) ) continue;
 	
 	// set some data
@@ -76,16 +96,23 @@ endforeach;
 
 
 // build content map
-$where = AK::_( 'query.publishedContent' );
-$sql = "SELECT * FROM #__content 
-		WHERE {$where} 
-		ORDER BY id DESC;" ;
-$contents = AK::_( 'db.loadObjectList' , $sql );
+$where = AK::_( 'query.publishingItems' );
+
+$q = $db->getQuery(true) ;
+
+$q->select("*")
+	->from("#__categories")
+	->where($where)
+	->order('id DESC')
+	;
+
+$db->setQuery($q);
+$contents = $db->loadObjectList();
 
 foreach( $contents as $content ):
 	
 	// get category link
-	$link = AK::_( 'content.getArticleLink' , $content->id , $content->catid , true ) ;
+	$link = AK::_( 'jcontent.getArticleLink' , $content->id , $content->catid , true ) ;
 	if( in_array( $link , $exists_links ) ) continue;
 	
 	// set some data

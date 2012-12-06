@@ -6,10 +6,10 @@ function addFbLikeButton ($context, $article) {
 	if( $context[0] != 'com_content' ) return ;
 	
 	// set Route
-	$uri = AK::getArticleLink( "{$article->id}:{$article->alias}" , $article->catid , 1 );
+	$uri = AK::_('jcontent.getArticleLink', "{$article->id}:{$article->alias}" , $article->catid , 1 );
 	
 	// set like	
-	$es = AK::getEasySet();
+	$es = AKEasyset::getInstance();
 	$position = $es->params->get('fbLikePosition' , 1 ) ;
 	
 	$like = <<<LIKE

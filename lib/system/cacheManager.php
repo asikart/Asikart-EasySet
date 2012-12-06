@@ -2,7 +2,7 @@
 
 function cacheManager()
 {
-	$es = AK::getEasySet();
+	$es = AKEasyset::getInstance();
 	$control_type 	= $es->params->get('cacheControlType', 'exclude') ;
 	$cache_menus 	= $es->params->get('CacheMenus', array()) ;
 	$cache_queries 	= $es->params->get('CacheQueries', array()) ;

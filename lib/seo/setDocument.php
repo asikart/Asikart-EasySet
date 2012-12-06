@@ -37,7 +37,7 @@ function setDocument( $easyset ) {
 		
 		// og:image
 		if( AK::isHome() ) {
-			$meta[] = '<meta property="og:image" content="'.AK::pathAddHost($easyset->params->get( 'ogDefaultImage' )).'"/>' ;
+			$meta[] = '<meta property="og:image" content="'.AK::_('uri.pathAddHost', $easyset->params->get( 'ogDefaultImage' )).'"/>' ;
 		}elseif( $easyset->ogImage ) {
 			$meta[] = '<meta property="og:image" content="'.$easyset->ogImage.'"/>' ;
 		}
@@ -49,8 +49,8 @@ function setDocument( $easyset ) {
 		$app_id		= $easyset->params->get('ogAppId') ;
 		
 		$meta[] = '<meta property="og:title" content="'.$doc->getTitle().'"/>' ;
-		$meta[] = '<meta property="og:site_name" content="'.AK::_( 'app.getConfig' , 'sitename' ).'"/>' ;
-		$meta[] = '<meta property="og:description" content="'.$doc->getDescription().'"/>' ;
+		$meta[] = '<meta property="og:site_name" content="'.$siteName.'"/>' ;
+		$meta[] = '<meta property="og:description" content="'.$easyset->_metaDesc.'"/>' ;
 		$meta[] = '<meta property="og:url" content="'.$url.'"/>' ;
 		
 		// admin, page, user ids

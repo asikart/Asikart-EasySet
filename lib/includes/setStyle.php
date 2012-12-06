@@ -1,6 +1,7 @@
 <?php
 
 function setStyle() {
+	$app = JFactory::getApplication() ;
 	$doc = JFactory::getDocument();
 	if( $doc->getType() != 'html' ) return ;
 
@@ -24,7 +25,7 @@ function setStyle() {
 	$base = JURI::root();
 	$style = "\n" ;
 	
-	if( AK::_( 'app.isSite' ) ):
+	if( $app->isSite() ):
 		if(JVERSION < 3.0) $style .= '<link rel="stylesheet" href="'.AK_ADMIN_CSS_URL.'/system.css" type="text/css" />'."\n";
 		$style .= '<link rel="stylesheet" href="'.AK_CSS_URL.'/custom-typo.css" type="text/css" />'."\n";
 		$style .= '<link rel="stylesheet" href="'.AK_CSS_URL.'/custom.css" type="text/css" />'."\n";
@@ -39,7 +40,7 @@ function setStyle() {
 	//Fold content
     $replace['{fold}'] = '<div class="ak-fold-warp"><div class="ak-fold-outter"><div class="ak-fold-inner">';
     $replace['{/fold}'] = '</div></div><div class="ak-fold-button"></div></div><div class="clearfix"></div>';
-    if( AK::_('app.isSite') ) $body[1] = strtr( $body[1] , $replace );
+    if( $app->isSite() ) $body[1] = strtr( $body[1] , $replace );
     
     $body = implode( '</head>' , $body );
 	JResponse::setBody($body);

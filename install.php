@@ -120,9 +120,32 @@ class plgSystemAsikart_easysetInstallerScript
 	 */
 	function postflight($type, $parent) 
 	{
-		// $parent is the class calling this method
-		// $type is the type of change (install, update or discover_install)
-		//echo '<p>' . JText::_('COM_HELLOWORLD_POSTFLIGHT_' . $type . '_TEXT') . '</p>';
+		$db = JFactory::getDbo();
+		
+		
+		// Get install manifest
+		// ========================================================================
+		$p_installer 	= $parent->getParent() ;
+		$installer 		= new JInstaller();
+		$manifest 		= $p_installer->manifest ;
+		$path 			= $p_installer->getPath('source');
+		$result			= array() ;
+		
+		$css =
+<<<CSS
+	<style type="text/css">
+		#ak-install-img {
+			
+		}
+		
+		#ak-install-msg {
+			
+		}
+	</style>
+CSS;
+		
+		echo $css ;
+		include_once $path.'/windwalker/admin/installscript.php' ;
 	}
 	
 	function _copyIncludeFiles(){
