@@ -18,28 +18,30 @@ if(JVERSION >= 3.0 && !defined('DS')){
 
 // Include WindWalker from libraries or plugin self.
 // ===============================================================
-$inner_ww_path 	= JPATH_PLUGINS."/system/asikart_easyset/windwalker" ;
-$lib_ww_path	= JPATH_LIBRARIES . '/windwalker' ;
+if(!defined('AKPATH_ROOT')) {
+	$inner_ww_path 	= JPATH_PLUGINS."/system/asikart_easyset/windwalker" ;
+	$lib_ww_path	= JPATH_LIBRARIES . '/windwalker' ;
+	
+	if(file_exists($lib_ww_path.'/init.php')) {
+		// From libraries
+		$ww_path = $lib_ww_path ;
+	}else{
+		// From Component folder
+		$ww_path = $inner_ww_path ;
+	}
 
-if(file_exists($lib_ww_path.'/init.php')) {
-	// From libraries
-	$ww_path = $lib_ww_path ;
-}else{
-	// From Component folder
-	$ww_path = $inner_ww_path ;
+
+	// Init WindWalker
+	// ===============================================================
+	if(!file_exists($ww_path.'/init.php')) {
+		$message = 'Please install WindWalker Framework libraries.' ;
+		throw new Exception($message, 500) ;
+	}
+	include_once $ww_path.'/init.php' ;
 }
-
-
-
-// Init WindWalker
-// ===============================================================
-if(!file_exists($ww_path.'/init.php')) {
-	$message = 'Please install WindWalker Framework libraries.' ;
-	throw new Exception($message, 500) ;
+else{
+	include_once AKPATH_ROOT.'/init.php' ;
 }
-include_once $ww_path.'/init.php' ;
-
-
 
 
 $akpath 	= JPATH_ROOT.DS.'easyset' ;
