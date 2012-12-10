@@ -16,7 +16,7 @@ $db 	= JFactory::getDbo();
 
 // Show Installed table
 // ========================================================================
-include_once JPATH_ADMINISTRATOR.'/components/'.$manifest->name.'/windwalker/html/grid.php';
+include_once $path.'/windwalker/html/grid.php';
 $grid = new AKGrid();
 
 $option['class'] = 'adminlist table table-striped table-bordered' ;
