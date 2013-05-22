@@ -17,7 +17,7 @@ function setMeta( $article , $easyset ) {
 		$metaDesc 			= strip_tags($metaDesc);
 		$metaDesc 			= trim($metaDesc);
 		$metaDesc 			= JString::substr($metaDesc,0,$easyset->params->get('maxMetaChar',250));
-		$easyset->_metaDesc = $metaDesc
+		$easyset->_metaDesc = $metaDesc ;
 	endif;
 	
 	//if($easyset->params->get('getMeta')) $doc->setDescription('123123123');

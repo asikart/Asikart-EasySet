@@ -31,6 +31,7 @@ function setContentMeta ( $article , $easyset ) {
 		// get meta from article content
 		$metaDesc 	= $article->text;
 		$metaDesc 	= strip_tags($metaDesc);
+		$metaDesc  	= preg_replace('/\{.*\}/', '', $metaDesc); // filter plgin like:{rsform 1}
 		
 		// remove line
 		$metaDesc 	= str_replace( "\r\n" , '' , $metaDesc);
