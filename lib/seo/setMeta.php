@@ -11,7 +11,7 @@ function setMeta( $article , $easyset ) {
 	$config = JFactory::getConfig();
 	
 	if( AKHelper::isHome() ):
-		$easyset->_metaDesc 	= $config->getValue('MetaDesc');
+		$easyset->_metaDesc 	= $config->get('MetaDesc');
 	else:
 		$metaDesc 			= $article->text;
 		$metaDesc 			= strip_tags($metaDesc);

@@ -10,14 +10,15 @@ function setDocument( $easyset ) {
 	$config 	= JFactory::getConfig();
 	$siteName	=  $config->get('sitename');
 	
-	//$easyset->_metaDesc = $doc->getBuffer('component' , '') ;
-	//$easyset->_metaDesc = strip_tags( $easyset->_metaDesc );
-	//$easyset->_metaDesc = trim( $easyset->_metaDesc );
-	//$easyset->_metaDesc = JString::substr( $easyset->_metaDesc , 0 , $easyset->params->get('maxMetaChar',250) );
-	//$easyset->metaDesc
 	
 	if($easyset->params->get('getMeta')) :
-		$doc->setDescription($easyset->_metaDesc);
+		
+		if( AKHelper::isHome() ) {
+			$doc->setDescription( $config->get('MetaDesc') );
+		}else{
+			$doc->setDescription( $easyset->_metaDesc );
+		}
+		
 	endif;
 	
 	// SEO Title
