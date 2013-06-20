@@ -34,6 +34,7 @@ class plgSystemAsikart_easyset extends JPlugin
 		parent::__construct( $subject, $config );
 		$this->loadLanguage();
 		$this->app 	= JFactory::getApplication();
+		AKHelper::_('include.addCSS', 'windwalker-admin.css', 'ww');
 		self::$instance = $this ;
     }
     

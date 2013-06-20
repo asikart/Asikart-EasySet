@@ -9,18 +9,6 @@ function setStyle() {
 	//include_once AK_LIB_PATH.DS.'dom'.DS.'simple_html_dom.php';
 	$body = JResponse::getBody();
 	
-	/*
-	$html = new DOMDocument();
-	$html->loadHTML($body);
-	
-	$head = $html->getElementsByTagName('head') ;
-	$link = $html->createElement("link");
-	$style = $head->item(0)->appendChild( $link ) ;
-	$style->setAttribute( 'rel' , 'stylesheet' );
-	$style->setAttribute( 'href' , 'easyset/custom.css' );
-	$style->setAttribute( 'type' , 'text/css' );
-	*/
-	
 	$body = explode( '</head>' , $body );
 	$base = JURI::root();
 	$style = "\n" ;

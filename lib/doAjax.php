@@ -1,5 +1,7 @@
 <?php
 
+defined( '_JEXEC' ) or die;
+
 function doAjax() {
 	$app = JFactory::getApplication() ;
 	if( $app->isAdmin() ) return ;

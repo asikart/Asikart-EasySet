@@ -30,7 +30,7 @@ class AKLanguageOrphan {
 		
 		// set ini into registry, then convert to object
 		$old	= new JRegistry();
-		$old->loadINI($file,null,array('processSections'=>'true'));
+		$old->loadString($file,'INI',array('processSections'=>'true'));
 		$old = $old->toObject();
 		
 		//AK::show($old);

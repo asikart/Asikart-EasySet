@@ -19,8 +19,7 @@ function gTranslate ($text,$SourceLan,$ResultLan) {
     $url->toString() ;
     $response =  file_get_contents( $url->toString() );
 	
-    $json = new JRegistry();
-    $json->loadJSON( $response );
+    $json = new JRegistry($response);
     
     $r =  $json->get( 'data.translations' ) ;
     

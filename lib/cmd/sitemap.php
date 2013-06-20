@@ -1,4 +1,6 @@
 <?php
+defined( '_JEXEC' ) or die;
+
 // set output format as XML
 JRequest::setVar( 'format' , 'xml' , 'method' , true ) ;
 
@@ -96,12 +98,12 @@ endforeach;
 
 
 // build content map
-$where = AK::_( 'query.publishingItems' );
+$where = AK::_( 'query.publishingItems' , '', 'state');
 
 $q = $db->getQuery(true) ;
 
 $q->select("*")
-	->from("#__categories")
+	->from("#__content")
 	->where($where)
 	->order('id DESC')
 	;

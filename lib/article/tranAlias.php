@@ -19,7 +19,7 @@ function tranAlias ($easyset) {
 	endif;
 	
 	if( trim($alias) == '' ) :
-		$alias = $easyset->getFunction( 'gTranslate' , $title, $SourceLan, $ResultLan);
+		$alias = AKHelper::_( 'lang.translate' , $title, $SourceLan, $ResultLan);
 		$alias = trim( $alias );
 		$alias = JFilterOutput::stringURLSafe($alias);
 		
@@ -34,41 +34,9 @@ function tranAlias ($easyset) {
 	$post['jform']['alias'] = $alias ;
 	$post['jform']['title'] = $title ;
 	
-	JRequest::setVar( 'jform' , $post['jform'] );
-}
-/*
-function tranAlias ($article , $easyset) {
-	$SourceLan = $easyset->params->get('originLan');
-    $ResultLan = $easyset->params->get('tranLlan','en');
+    $input = JFactory::getApplication()->input ;
     
-    $titleTmp = explode( '::' , $article->title);
-    if( $titleTmp[1] ) :
-		$article->title = $titleTmp[0];
-		$article->alias = JFilterOutput::stringURLSafe($titleTmp[1]);
-	endif;
-    
-	$alias2 = JFilterOutput::stringURLSafe($article->title);
-	
-    if(trim(str_replace('-','',$alias2)) == '') {
-        $datenow = JFactory::getDate();
-        $alias2 = $datenow->toFormat("%Y-%m-%d-%H-%M-%S");
-    }
-	
-	if($article->alias == $alias2){
-		$article->alias = $easyset->getFunction( 'gTranslate' , $article->title, $SourceLan, $ResultLan);
-		
-		$article->alias = trim( $article->alias );
-		$article->alias = JFilterOutput::stringURLSafe($article->alias);
-		
-		$replace = array(	'aquot' => '' ,
-							'a39'	=> '' ,
-							'--'	=> '-'
-							);
-		$article->alias = strtr( $article->alias , $replace );
-		$article->alias = trim( $article->alias , '-' );
-		
-    }
-	
-    return $article;
+	JRequest::setVar( 'jform' , $post['jform'] , 'method', true);
+    $input->post->set( 'jform' , $post['jform'] );
+    $input->request->set( 'jform' , $post['jform'] );
 }
-*/

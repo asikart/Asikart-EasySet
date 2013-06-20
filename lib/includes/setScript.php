@@ -9,6 +9,8 @@ function setScript() {
 	
 	if( $doc->getType() !== 'html' ) return ;
 	
+	JHtml::_('behavior.framework', true);
+	
 	$doc->addScript( AK_ADMIN_JS_URL.'/easyset.js' );
 	$doc->addScript( AK_JS_URL.'/easyset-custom.js' );
 	
