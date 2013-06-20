@@ -12,7 +12,7 @@ function setContentMeta ( $article , $easyset ) {
 	$config = JFactory::getConfig();
 	
 	// get menu meta, if nonexists, use article meta
-	if( isset($article->params) && isset($article->metadesc) )
+	if( isset($article->params) && $article->params instanceof JRegistry && isset($article->metadesc) )
 		$metaDesc = $article->params->get('menu-meta_description' , $article->metadesc ) ;
 	
 	

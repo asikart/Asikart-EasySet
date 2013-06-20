@@ -17,7 +17,7 @@ function gTranslate ($text,$SourceLan,$ResultLan) {
     
     $url->setQuery( $query );
     $url->toString() ;
-    $response =  file_get_contents( $url->toString() );
+    $response =  AKHelper::_( 'curl.getPage', $url->toString() );
 	
     $json = new JRegistry($response);
     
