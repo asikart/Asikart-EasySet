@@ -33,7 +33,6 @@ var AKQuickAdd = ({
         // Remove Required
         inputs.each( function(e){
             e.removeClass('required');
-            console.log(e);
             e.set('default', e.get('value'));
         });
     }
@@ -149,7 +148,6 @@ var AKQuickAdd = ({
         // Send Request
         uri.setData(option);
         
-        area.send(uri.toString());
         area.send(uri.toString());
     }
     ,

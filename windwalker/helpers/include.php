@@ -22,6 +22,7 @@ class AKHelperInclude
 {
     static $bootstrap ;
     static $bluestork ;
+    static $isis ;
     
     
     /**
@@ -57,6 +58,8 @@ JS;
     
     /**
      * Include WindWalker and component core JS.
+     *
+     * @param   boolean $js include core JS or not.
      */
     public static function core($js = true)
     {
@@ -67,12 +70,24 @@ JS;
         
         $prefix = $app->isAdmin() ? '../' : '' ;
         
-        if($js){
+        if($js)
+        {
+            // include Mootools first
             JHtml::_('behavior.framework', true);
-            if($app->isSite()){
+            
+            // Include jQuery in Joomla 3.
+            if(JVERSION >= 3)
+            {
+                JHtml::_('jquery.framework', true);
+            }
+            
+            if($app->isSite())
+            {
                 $doc->addScript( AKHelper::_('path.getWWUrl').'/assets/js/windwalker.js');
                 $doc->addScript( 'components/'.$option.'/includes/js/'.$com_name.'.js');
-            }else{
+            }
+            else
+            {
                 $doc->addScript( AKHelper::_('path.getWWUrl').'/assets/js/windwalker-admin.js');
                 $doc->addScript( 'components/'.$option.'/includes/js/'.$com_name.'-admin.js');
             }
@@ -144,15 +159,23 @@ JS;
      */
     public static function isis()
     {
+        if(JVERSION < 3 || self::$isis)
+        {
+            return;
+        }
+        
         $doc    = JFactory::getDocument();
         $app    = JFactory::getApplication() ;
         $option = JRequest::getVar('option') ;
         
         $prefix = $app->isSite() ? 'administrator/' : '' ;
         
-        $doc->addStylesheet($prefix.'templates/isis/css/template.css');
+        JHtml::_('jquery.framework', true);
         
-        self::$bluestork = true ;
+        $doc->addStylesheet($prefix.'templates/isis/css/template.css');
+        $doc->addScript($prefix.'templates/isis/js/template.js');
+        
+        self::$isis = true ;
     }
     
     

@@ -26,35 +26,35 @@ class AKModelAdmin extends JModelAdmin
      *
      * @var string 
      */
-    public $component = '';
+    protected $component = '';
     
     /**
      * The URL view item variable.
      *
      * @var    string 
      */
-    public $item_name = '';
+    protected $item_name = '';
     
     /**
      * The URL view list variable.
      *
      * @var    string 
      */
-    public $list_name = '';
+    protected $list_name = '';
     
     /**
      * Item cache.
      *
      * @var object 
      */
-    public $item      = null;
+    protected $item      = null;
     
     /**
      * Category cache.
      *
      * @var object 
      */
-    public $category  = null;
+    protected $category  = null;
     
     
     /**
@@ -282,29 +282,53 @@ class AKModelAdmin extends JModelAdmin
     }
     
     /**
-     * Method to test whether a record can be deleted.
+     * Get an related item of current item.
+     * 
+     * @param   string  $name       The table name.
+     * @param   mixed   $condition  May be id or a condition array for JTable to fetch item.
      *
-     * @param   object  $record  A record object.
-     *
-     * @return  boolean  True if allowed to delete the record. Defaults to the permission for the component.
+     * @return  JObject Related ttem.
      */
-    protected function canDelete($record)
+    public function getRelatedItem($name, $condition)
     {
-        $user = JFactory::getUser();
-        return $user->authorise('core.delete', $this->option.'.'.$this->item_name.'.'.$record->id);
+        $table = $this->getTable(ucfirst($name)) ;
+        
+        if( $table->load($condition) ) {
+            
+            $item = get_object_vars($table) ;
+            
+            foreach( $item as $key => $val ):
+                if($key == '_errors') continue ;
+            
+                $item[ strtolower($name) . '_' . $key ] = $val ;
+                unset( $item[$key] );
+            endforeach;
+            
+            $item = new JObject($item);
+            
+            return $item ;
+        }else{
+            //$this->setError($table->getError());
+            return false ;
+        }
     }
- 
+    
     /**
-     * Method to test whether a record can be deleted.
+     * Get related items of current item.
+     * 
+     * @param   string  $name       The model name.
+     * @param   array   $condition  A condition array for ModelList Filter State.
      *
-     * @param   object  $record  A record object.
-     *
-     * @return  boolean  True if allowed to change the state of the record. Defaults to the permission for the component.
+     * @return array Related items.
      */
-    protected function canEditState($record)
+    public function getRelatedItems($name, $condition = array())
     {
-        $user = JFactory::getUser();
-        return $user->authorise('core.edit.state', $this->option.'.'.$this->item_name.'.'.$record->id);
+        $model = JModelLegacy::getInstance(ucfirst($name), ucfirst($this->component).'Model', array('ignore_request' => true));
+        
+        $model->setState('filter', $condition);
+        $items = $model->getItems();
+        
+        return (array) $items ;
     }
     
     /**
@@ -316,11 +340,13 @@ class AKModelAdmin extends JModelAdmin
      */
     protected function getReorderConditions($table)
     {
+        $condition = array();
+        
         if(property_exists($table, 'catid')){
-            $condition = array();
-            $condition[] = 'catid = '.(int) $table->catid;
-            return $condition;
+            $condition[] = 'catid = ' . $table->catid;
         }
+        
+        return $condition;
     }
     
     /**
@@ -344,7 +370,7 @@ class AKModelAdmin extends JModelAdmin
             ;
         
         $db->setQuery($q);
-        $db->query();
+        $db->execute();
         
         
         // Get an instance of the table object.
@@ -524,6 +550,18 @@ class AKModelAdmin extends JModelAdmin
     }
     
     /**
+     * If category need authorize, we can write in this method.
+     *
+     * @param   int $record category record.
+     *
+     * @return  boolean Can edit or not.
+     */
+    public function canCategoryCreate($record)
+    {
+        return true;
+    }
+    
+    /**
      * Method to duplicate items.
      *
      * @param   array  &$pks  An array of primary key IDs.
@@ -581,6 +619,31 @@ class AKModelAdmin extends JModelAdmin
         $this->cleanCache();
 
         return true;
+    }
+    
+    /**
+     * Method to validate the form data.
+     *
+     * @param   object  $form   The form to validate against.
+     * @param   array   $data   The data to validate.
+     * @param   string  $group  The name of the field group to validate.
+     *
+     * @return  mixed  Array of filtered data if valid, false otherwise.
+     *
+     * @see     JFormRule
+     * @see     JFilterInput
+     * @since   11.1
+     */
+    public function validate($form, $data, $group = null)
+    {
+        if( $result = parent::validate($form, $data, $group) ) {
+            // for Fields group
+            // Convert jform[fields_group][field] to jform[field] or JTable cannot bind data.
+            // ==========================================================================================
+            $result = AKHelper::_('array.pivotFromTwoDimension', $result);
+        }
+        
+        return $result ;
     }
 
     /**
@@ -662,15 +725,22 @@ class AKModelAdmin extends JModelAdmin
         // ==========================================================================================
         foreach( $pks as $pk ):
             
+            $hasAction = false ;
+            
+            $table->load($pk);
+            $allow_fields = array();
+            
             // Can item editable?
+            if(!property_exists($table, 'asset_id')) {
+                $contexts[$pk] = explode('.', $contexts[$pk]);
+                $contexts[$pk] = $contexts[$pk][0];
+            }
+            
             if (!$user->authorise('core.edit', $contexts[$pk]))
             {
                 $this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_EDIT'));
                 return false;
             }
-            
-            $table->load($pk);
-            $allow_fields = array();
             
             // Set Value
             foreach( $commands as $key => $val ):
@@ -682,7 +752,7 @@ class AKModelAdmin extends JModelAdmin
                 
                 // Detect Category Access
                 if( $key == 'catid' ) {
-                    if (!$user->authorise('core.create', $this->option . '.category.' . $val))
+                    if (!$this->canCategoryCreate($val))
                     {
                         $this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_CREATE'));
                         return false;
@@ -696,15 +766,28 @@ class AKModelAdmin extends JModelAdmin
                     $allow_fields[$key] = $val ;
                 }
                 
-                $done = true ;
+                $done       = true ;
+                $hasAction  = true ;
                 
             endforeach;
+            
+            // If no action has to execute, continue;
+            if(!$hasAction)
+            {
+                continue;
+            }
             
             
             // Handle Nested Batch
             // ==========================================================================================
-            if( $nested && in_array('parent_id', $commands) ) {
-                if (!$user->authorise('core.create', $this->option . '.' . $this->item_name . '.' . $commands['parent_id']))
+            if( $nested && in_array('parent_id', $commands) )
+            {
+                // If assit_id dosen't exists, don't check item access.
+                $canCreate = ($commands['parent_id'] == $table->getRootId()) || !property_exists($table, 'asset_id')
+                            ? $user->authorise('core.create', $extension)
+                            : $user->authorise('core.create', $extension . '.' . $this->item_name . '.' . $commands['parent_id']);
+                
+                if (!$canCreate)
                 {
                     $this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_CREATE'));
                     return false;
@@ -725,7 +808,8 @@ class AKModelAdmin extends JModelAdmin
                 if( property_exists($table, 'title') ) $allow_fields['title'] = $table->title ;
                 if( property_exists($table, 'alias') ) $allow_fields['alias'] = $table->alias ;
                 
-                while ($table2->load( $allow_fields ))
+                // Get item with same name & alias, if true, increment title & alias
+                if($table2->load( $allow_fields ))
                 {
                     if( property_exists($table, 'title') ) {
                         $table->title = $allow_fields['title'] = JString::increment($table->title);
@@ -782,12 +866,12 @@ class AKModelAdmin extends JModelAdmin
      */
     protected function batchCopyNested($value, $pks, $contexts)
     {
-        $parentId     = $value ? (int) $value : 1 ;
-        $table         = $this->getTable();
+        $parentId   = $value ? (int) $value : 1 ;
+        $table      = $this->getTable();
         $db         = $this->getDbo();
-        $user         = JFactory::getUser();
-        $extension     = $this->option;
-        $i = 0;
+        $user       = JFactory::getUser();
+        $extension  = $this->option;
+        $i          = 0;
 
         // Check that the parent exists
         if ($parentId)
@@ -808,7 +892,10 @@ class AKModelAdmin extends JModelAdmin
                 }
             }
             // Check that user has create permission for parent category
-            $canCreate = ($parentId == $table->getRootId()) ? $user->authorise('core.create', $extension) : $user->authorise('core.create', $extension . '.' . $this->item_name . '.' . $parentId);
+            $canCreate = ($parentId == $table->getRootId()) || !property_exists($table, 'asset_id')
+                        ? $user->authorise('core.create', $extension)
+                        : $user->authorise('core.create', $extension . '.' . $this->item_name . '.' . $parentId);
+                        
             if (!$canCreate)
             {
                 // Error since user cannot create in parent category
@@ -911,8 +998,8 @@ class AKModelAdmin extends JModelAdmin
 
             // TODO: Deal with ordering?
             //$table->ordering    = 1;
-            $table->level         = null;
-            $table->asset_id     = null;
+            $table->level       = null;
+            $table->asset_id    = null;
             $table->lft         = null;
             $table->rgt         = null;
 
@@ -968,13 +1055,12 @@ class AKModelAdmin extends JModelAdmin
      */
     protected function batchMoveNested($value, $pks, $contexts)
     {
-        $parentId = (int) $value;
-
-        $table     = $this->getTable();
-        $db     = $this->getDbo();
-        $query     = $db->getQuery(true);
-        $user     = JFactory::getUser();
-        $extension = $this->option;
+        $parentId   = $value;
+        $table      = $this->getTable();
+        $db         = $this->getDbo();
+        $query      = $db->getQuery(true);
+        $user       = JFactory::getUser();
+        $extension  = $this->option;
 
         
         // Check that the parent exists.
@@ -997,7 +1083,10 @@ class AKModelAdmin extends JModelAdmin
                 }
             }
             // Check that user has create permission for parent category
-            $canCreate = ($parentId == $table->getRootId()) ? $user->authorise('core.create', $extension) : $user->authorise('core.create', $extension . '.' . $this->item_name . '.' . $parentId);
+            $canCreate = ($parentId == $table->getRootId()) || !property_exists($table, 'asset_id')
+                        ? $user->authorise('core.create', $extension)
+                        : $user->authorise('core.create', $extension . '.' . $this->item_name . '.' . $parentId);
+                        
             if (!$canCreate)
             {
                 // Error since user cannot create in parent category
@@ -1009,7 +1098,11 @@ class AKModelAdmin extends JModelAdmin
             // Note that the entire batch operation fails if any category lacks edit permission
             foreach ($pks as $pk)
             {
-                if (!$user->authorise('core.edit', $extension . '.' . $this->item_name . '.' . $pk))
+                $canEdit = !property_exists($table, 'asset_id')
+                            ? $user->authorise('core.create', $extension)
+                            : $user->authorise('core.create', $extension . '.' . $this->item_name . '.' . $pk);
+                
+                if (!$canEdit)
                 {
                     // Error since user cannot edit this category
                     $this->setError(JText::_($this->text_prefix.'_BATCH_CANNOT_EDIT'));

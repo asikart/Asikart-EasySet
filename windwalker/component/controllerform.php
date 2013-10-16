@@ -26,21 +26,21 @@ class AKControllerForm extends JControllerForm
      *
      * @var    string 
      */
-    public $view_list = '';
+    protected $view_list = '';
     
     /**
      * The URL view item variable.
      *
      * @var    string 
      */
-    public $view_item = '';
+    protected $view_item = '';
     
     /**
      * Component name.
      *
      * @var string 
      */
-    public $component = '';
+    protected $component = '';
     
     
     /**
@@ -170,25 +170,5 @@ class AKControllerForm extends JControllerForm
         }else{
             return parent::setRedirect($url, $msg, $type) ;
         }
-    }
-    
-    /**
-     * Method to check if you can add a new record.
-     *
-     * Extended classes can override this if necessary.
-     *
-     * @param   array   $data  An array of input data.
-     * @param   string  $key   The name of the key for the primary key; default is id.
-     *
-     * @return  boolean
-     */
-    protected function allowEdit($data = array(), $key = 'id')
-    {
-        $user = JFactory::getUser() ;
-        
-        $allowOwn = $user->authorise('core.edit.own', $this->option) && (JArrayHelper::getValue($data, 'created_by') == $user->id) ;
-        $allowEdit = $user->authorise('core.edit', $this->option.'.'.$this->view_item.'.'.$data[$key]) ;
-        
-        return ($allowEdit || $allowOwn) ;
     }
 }
