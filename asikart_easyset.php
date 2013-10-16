@@ -44,29 +44,29 @@ else{
 }
 
 
-$akpath 	= JPATH_ROOT.DS.'easyset' ;
+$akpath 	= JPATH_ROOT.'/easyset' ;
 $akurl		= JURI::root().'easyset/' ;
 
-$akadmin_path 	= JPATH_PLUGINS.DS.'system'.DS.'asikart_easyset' ;
+$akadmin_path 	= JPATH_PLUGINS.'/system/asikart_easyset' ;
 $akadmin_url	= JURI::root().'plugins/system/asikart_easyset' ;
-$mainfile 		= $akadmin_path.DS.'main.php';
+$mainfile 		= $akadmin_path.'/main.php';
 
 define('AK_PATH' 		, $akpath );
-define('AK_CMD_PATH'	, AK_PATH.DS.'cmd');
+define('AK_CMD_PATH'	, AK_PATH.'/cmd');
 define('AK_URL'			, $akurl);
 define('AK_JS_URL'		, AK_URL.'js');
 define('AK_CSS_URL'		, AK_URL.'css');
 
 define('AK_ADMIN_PATH' 		, $akadmin_path );
-define('AK_ADMIN_LIB_PATH'	, AK_ADMIN_PATH.DS.'lib');
-define('AK_ADMIN_CMD_PATH'	, AK_ADMIN_LIB_PATH.DS.'cmd');
+define('AK_ADMIN_LIB_PATH'	, AK_ADMIN_PATH.'/lib');
+define('AK_ADMIN_CMD_PATH'	, AK_ADMIN_LIB_PATH.'/cmd');
 define('AK_ADMIN_URL'		, $akadmin_url);
 define('AK_ADMIN_JS_URL'	, AK_ADMIN_URL.'/lib/includes/js');
 define('AK_ADMIN_CSS_URL'	, AK_ADMIN_URL.'/lib/includes/css');
 
 
 // load AKHelper
-if( !class_exists( 'AKHelper' ) ) include_once ( AK_ADMIN_LIB_PATH.DS.'akhelper'.DS.'akhelper.init.php' );
+if( !class_exists( 'AKHelper' ) ) include_once ( AK_ADMIN_LIB_PATH.'/akhelper/akhelper.init.php' );
 
 // include something
 jimport( 'joomla.filesystem.file' );

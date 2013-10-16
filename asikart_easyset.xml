@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="2.5" type="plugin" group="system" method="upgrade">
+<extension version="3.2" type="plugin" group="system" method="upgrade">
     <name>System - Asikart Easy Set</name>
     <author>Asikart.com</author>
     <creationDate>2011-06-28</creationDate>
-    <copyright>(C) 2011 Asikart.com. All rights reserved.</copyright>
+    <copyright>(C) 2013 Asikart.com. All rights reserved.</copyright>
     <license>GNU/GPL</license>
     <authorEmail>asika@asikart.com</authorEmail>
     <authorUrl>http://asikart.com</authorUrl>
-    <version>2.6.1</version>
+    <version>2.6.3</version>
     <description>Asikart Easy Set. Easy setup Joomla! Site!</description>
     <files>
         <filename plugin="asikart_easyset">asikart_easyset.php</filename>
@@ -132,7 +132,7 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-				<field name="ogDefaultImage" type="media" directory="images" default="" label="OG_DEFAULT_IMAGE" description="OG_DEFAULT_IMAGE_DESC" />
+				<field name="ogDefaultImage" type="media" directory="images" default="-1" label="OG_DEFAULT_IMAGE" description="OG_DEFAULT_IMAGE_DESC" />
 				<field name="ogDefaultImageOnlyFrontPage" type="radio" class="btn-group" default="1" label="OG_DEFAULT_IMAGE_ONLY_FRONTPAGE" description="OG_DEFAULT_IMAGE_ONLY_FRONTPAGE_DESC">
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
@@ -204,7 +204,7 @@
 	<scriptfile>install.php</scriptfile>
 	
 	<updateservers>
-        <server type="extension" priority="1" name="Asikart Easyset">http://asikart.com/update/asikart_easyset.xml</server>
+        <server type="extension" priority="1" name="Asikart Easyset">http://update.asikart.com/plugin/system/asikart_easyset.xml</server>
         <!--<server type="collection" priority="2" name="Collection Update Site">http://example.com/collection.xml</server>-->
     </updateservers>
 </extension>
