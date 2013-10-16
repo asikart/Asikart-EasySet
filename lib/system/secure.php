@@ -31,6 +31,12 @@ function secure()
             return true;
         }
         
+        if(!$session->get('tried_login'))
+        {
+            $_SERVER['PHP_AUTH_USER'] = null;
+            $session->set('tried_login', true);
+        }
+        
         try
         {
             $username = isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : null;
@@ -76,6 +82,7 @@ function secure()
     if ($logged)
     {
         $session->set('aksecure', true);
+        $session->set('tried_login', false);
         $app->redirect(JFactory::getURI()->toString());
     }
 }
