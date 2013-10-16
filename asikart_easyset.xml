@@ -132,7 +132,7 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-				<field name="ogDefaultImage" type="media" directory="images" default="-1" label="OG_DEFAULT_IMAGE" description="OG_DEFAULT_IMAGE_DESC" />
+				<field name="ogDefaultImage" type="media" directory="images" default="" label="OG_DEFAULT_IMAGE" description="OG_DEFAULT_IMAGE_DESC" />
 				<field name="ogDefaultImageOnlyFrontPage" type="radio" class="btn-group" default="1" label="OG_DEFAULT_IMAGE_ONLY_FRONTPAGE" description="OG_DEFAULT_IMAGE_ONLY_FRONTPAGE_DESC">
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>

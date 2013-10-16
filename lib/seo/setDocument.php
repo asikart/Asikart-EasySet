@@ -37,9 +37,15 @@ function setDocument( $easyset ) {
 		$meta = array();
 		
 		// og:image
-		if( AK::isHome() ) {
-			$meta[] = '<meta property="og:image" content="'.AK::_('uri.pathAddHost', $easyset->params->get( 'ogDefaultImage' )).'"/>' ;
-		}elseif( $easyset->ogImage ) {
+		if( AK::isHome() )
+		{
+			if ($easyset->params->get( 'ogDefaultImage' ))
+			{
+				$meta[] = '<meta property="og:image" content="'.AK::_('uri.pathAddHost', $easyset->params->get( 'ogDefaultImage' )).'"/>' ;
+			}
+		}
+		elseif( $easyset->ogImage )
+		{
 			$meta[] = '<meta property="og:image" content="'.$easyset->ogImage.'"/>' ;
 		}
 		
