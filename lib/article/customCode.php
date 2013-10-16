@@ -29,7 +29,7 @@ function customCode( $position , $prepareContent = false , $article = null ) {
 	
 	// Inset the code to article
 	if( $prepareContent ):
-		if(!$article) return;
+		if(!is_object($article)) return;
 		
 		switch( $position ){
 			case 'insertArticleTop' :
