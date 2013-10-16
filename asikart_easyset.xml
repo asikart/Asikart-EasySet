@@ -170,6 +170,28 @@
 				<field name="showNumber" type="text" default="3" label="SHOW_NUMBER" description="SHOW_NUMBER_DESC" />
 			</fieldset>
 			<fieldset name="system">
+				<field
+					name="adminSecure"
+					type="list"
+					label="ADMIN_SECURE"
+					description="ADMIN_SECURE_DESC"
+				>
+					<option value="">JNO</option>
+					<option value="url">ADMIN_SECURE_BY_URL</option>
+					<option value="auth">ADMIN_SECURE_BY_HTTP_AUTH</option>
+					<option value="auth_user">ADMIN_SECURE_BY_HTTP_AUTH_AND_USER</option>
+				</field>
+				
+				<field
+					name="adminSecureCode"
+					type="text"
+					default="ezset"
+					size="30"
+					label="ADMIN_SECURE_CODE"
+					description="ADMIN_SECURE_CODE_DESC"
+				/>
+				
+				<field type="spacer" hr="true" description="" />
 				<field name="languageOrphan" type="radio" class="btn-group" default="0" label="LANGUAGE_ORPHAN" description="LANGUAGE_ORPHAN_DESC" >
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>

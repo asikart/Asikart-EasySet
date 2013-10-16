@@ -32,9 +32,13 @@ class plgSystemAsikart_easyset extends JPlugin
     public function __construct(&$subject, $config)
     {
 		parent::__construct( $subject, $config );
+		
 		$this->loadLanguage();
+		
 		$this->app 	= JFactory::getApplication();
+		
 		AKHelper::_('include.addCSS', 'windwalker-admin.css', 'ww');
+		
 		self::$instance = $this ;
     }
     
@@ -42,7 +46,8 @@ class plgSystemAsikart_easyset extends JPlugin
 	
 	// =========================== Events ======================================
 	
-	public function onAfterInitialise() {
+	public function onAfterInitialise()
+	{
 		
 		$this->getFunction( 'doCmd' ) ;
 		if( $this->params->get( 'tranAlias' , 1 ) ) $this->getFunction( 'article.tranAlias' , $this );
@@ -53,20 +58,26 @@ class plgSystemAsikart_easyset extends JPlugin
 	}
 	
 	
-	public function onAfterRoute() {
+	public function onAfterRoute()
+	{
 		@include $this->includeEvent(__FUNCTION__);
 	}
 	
 	
-	public function onAfterDispatch() {
+	public function onAfterDispatch()
+	{
+		$this->getFunction( 'system.secure' );
+		
 		$this->getFunction( 'seo.setDocument' , $this );
+		
 		$this->getFunction( 'includes.setScript' );
 		
 		@include $this->includeEvent(__FUNCTION__);
 	}
 	
 	
-	public function onAfterRender() {
+	public function onAfterRender()
+	{
 		$this->getFunction( 'includes.insertHeader' );
 		$this->getFunction( 'includes.setStyle' );
 		
@@ -75,7 +86,8 @@ class plgSystemAsikart_easyset extends JPlugin
 	}
 	
 	
-	public function onContentPrepare($context, &$article, &$params, $page = 0) {
+	public function onContentPrepare($context, &$article, &$params, $page = 0)
+	{
 		// getMeta
 		//if( $this->params->get( 'getMeta' , 1 ) )
 		$this->getFunction( 'seo.setContentMeta' , $article , $this );
@@ -238,7 +250,7 @@ class plgSystemAsikart_easyset extends JPlugin
 			$file		= $function ;
 		}
 		
-		$func_path 		= implode(DS, $path).DS.$file;
+		$func_path 		= implode(DS, $path).'/'.$file;
 		$file 			= AK_PATH.DS.$func_path.'.php';
 		
 		
@@ -282,7 +294,7 @@ class plgSystemAsikart_easyset extends JPlugin
 	
 	public function includeEvent($func)
 	{
-		$event = AK_PATH.DS.'events'.DS.$func.'.php' ;
+		$event = AK_PATH.'/events/'.$func.'.php' ;
 		if(file_exists( $event )) return $event ;
 	}
 	
