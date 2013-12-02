@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.2" type="plugin" group="system" method="upgrade">
+    <name>System - Asikart Easy Set</name>
+    <author>Asikart.com</author>
+    <creationDate>2011-06-28</creationDate>
+    <copyright>(C) 2013 Asikart.com. All rights reserved.</copyright>
+    <license>GNU/GPL</license>
+    <authorEmail>asika@asikart.com</authorEmail>
+    <authorUrl>http://asikart.com</authorUrl>
+    <version>2.6.3</version>
+    <description>Asikart Easy Set. Easy setup Joomla! Site!</description>
+    <files>
+        <filename plugin="asikart_easyset">asikart_easyset.php</filename>
+        <!--<filename>asikart_easyset.xml</filename>-->
+        <filename>main.php</filename>
+        <filename>index.html</filename>
+        <filename>install.php</filename>
+        <folder>css</folder>
+        <folder>js</folder>
+        <folder>lib</folder>
+        <folder>imgs</folder>
+        <folder>fields</folder>
+        <folder>language</folder>
+        <folder>windwalker</folder>
+    </files>
+    <config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="includejQuery" 			default="0" type="radio" class="btn-group" label="INCLUDE_JQUERY" description="INCLUDE_JQUERY_DESC" >
+		        	<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+				<field name="includeBootstrap" 			default="0" type="radio" class="btn-group" label="INCLUDE_BOOTSTRAP" description="INCLUDE_BOOTSTRAP_DESC" >
+		        	<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+				<field type="spacer" hr="true" description="" />
+		     	<!--<field name="insertjQueryFromGoogle" default="0" type="radio" class="btn-group" label="INCLUDE_FROM_GOOGLE" description="INCLUDE_FROM_GOOGLE_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+		        <field name="insertjQueryPath" 		default="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text" label="INCLUDE_JQUERY_PATH" description="INCLUDE_JQUERY_PATH_DESC" />
+		        <field name="removeMootools" default="0" type="radio" class="btn-group" label="REMOVE_MOOTOOLS" description="REMOVE_MOOTOOLS_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+		        <field name="removeCaptions" default="0" type="radio" class="btn-group" label="REMOVE_CAPTIONS" description="REMOVE_CAPTIONS_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+		     	<field name="spacer" 				type="spacer" hr="true" label="" description="" />-->
+		     	<field name="colorTable" 			default="0" type="radio" class="btn-group" label="COLOR_TABLE" description="COLOR_TABLE_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+		     	<!--<field name="accessibility" 		default="0" type="radio" class="btn-group" label="ACCESSIBILITY" description="ACCESSIBILITY_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>-->
+		     	<field name="tidyRepair" 			default="0" type="radio" class="btn-group" label="TIDY_REPAIR" description="TIDY_REPAIR_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+				<field name="smoothScroll" 			default="0" type="radio" class="btn-group" label="SMOOTH_SCROLL" description="SMOOTH_SCROLL_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+		        <!--<field name="spacer2" 				type="spacer" hr="true" label="" description="" />
+		     	<field name="frontend-tools" 		default="0" type="radio" class="btn-group" label="FRONTEND_TOOLS" description="FRONTEND_TOOLS_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+		        <field name="blogConverter" 		default="0" type="radio" class="btn-group" label="BLOG_CONVERTER" description="BLOG_CONVERTER_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>-->
+		        <field name="spacer4" 				type="spacer" hr="true" description="" />
+		     	<field name="getImages" 			default="0" type="radio" class="btn-group" label="GET_IMAGES" description="GET_IMAGES_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+		        <field name="blogViewClearly" 		default="0" type="radio" class="btn-group" label="BLOG_VIEW_CLEARLY" description="BLOG_VIEW_CLEARLY_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+		        <field name="blogViewImgWidth" 		default="150" type="text" label="BLOG_VIEW_IMG_WIDTH" description="BLOG_VIEW_IMG_WIDTH_DESC" />
+		        <field name="blogViewImgCrop" 		default="0" type="radio" class="btn-group" label="BLOG_VIEW_IMG_CROP" description="BLOG_VIEW_IMG_CROP_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+				<field name="blogViewCleanTags" 		default="0" type="radio" class="btn-group" label="BLOG_VIEW_CLEAN_TAGS" description="BLOG_VIEW_CLEAN_TAGS_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+		        <field name="blogViewTagsAllow" 	type="text" filter="raw" label="BLOG_VIEW_TAGS_ALLOW" description="BLOG_VIEW_TAGS_ALLOW_DESC" />
+		        <field name="blogViewMaxChar" 		default="250" type="text" label="BLOG_VIEW_MAX_CHAR" description="BLOG_VIEW_MAX_CHAR" />
+				<field type="spacer" hr="true" 		description="" />
+		        <field name="autoThumbnail" 		default="0" type="radio" class="btn-group" label="AUTO_THUMB" description="AUTO_THUMB_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+		        <field name="onlyLocalhostThumb" 	default="1" type="radio" class="btn-group" label="ONLY_LOCAL_THUMB" description="ONLY_LOCAL_THUMB_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+			</fieldset>
+		    <fieldset name="SEO">
+		     	<field name="tranAlias" 			default="0" type="radio" class="btn-group" label="TRAN_ALIAS" description="TRAN_ALIAS_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+		     	<field name="originLan" 			default="" type="text" label="ORIGIN_LAN" description="ORIGIN_LAN_DESC" />
+		     	<field name="tranLan" 				default="" type="text" label="TRAN_LAN" description="TRAN_LAN_DESC" />
+				<field name="spacer3" 				default="" type="spacer" hr="true" label="" description="" />
+				<field name="seo" 					default="0" type="radio" class="btn-group" label="SEO" description="SEO_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+		     	<field name="titleFix" 				default="{%TITLE%} | {%SITE%}" type="text" size="50" label="TITLE_FIX" description="TITLE_FIX_DESC" />
+		        <field name="titleSeparator" 		default="|" type="text" label="TITLE_SEPARATOR" description="TITLE_SEPARATOR_DESC" />
+		     	<field name="getMeta" 				default="0" type="radio" class="btn-group" label="GET_META" description="GET_META_DESC" >
+		     		<option value="1">JYES</option>
+		            <option value="0">JNO</option>
+		        </field>
+		     	<field name="maxMetaChar" 			default="250" type="text" label="MAX_META_CHAR" description="MAX_META_CHAR_DESC" />
+		     	<field name="generator" 			type="text" label="GENERATOR" description="GENERATOR_DESC" />
+		     	<field default="" type="spacer" hr="true" />
+		     	<field name="insertHeader" 			type="codemirror" filter="raw" default="" label="INCLUDE_HEADER" description="INCLUDE_HEADER_DESC" />
+			</fieldset>
+			<fieldset name="SOCIAL">
+				<field name="openGraph" type="radio" class="btn-group" default="0" label="OG" description="OG_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="ogDefaultImage" type="media" directory="images" default="" label="OG_DEFAULT_IMAGE" description="OG_DEFAULT_IMAGE_DESC" />
+				<field name="ogDefaultImageOnlyFrontPage" type="radio" class="btn-group" default="1" label="OG_DEFAULT_IMAGE_ONLY_FRONTPAGE" description="OG_DEFAULT_IMAGE_ONLY_FRONTPAGE_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="ogAdminId" default="" type="text" size="30" label="OG_ADMIN" description="OG_ADMIN_DESC" />
+				<field name="ogPageId" 	default="" type="text" size="30" label="OG_PAGE" description="OG_PAGE_DESC" />
+				<field name="ogAppId" 	default="" type="text" size="30" label="OG_APP" description="OG_APP_DESC" />
+				<field type="spacer" hr="true" description="" />
+				<field name="fbLike" type="radio" class="btn-group" default="0" label="FB_LIKE" description="FB_LIKE" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="fbLikeOnBlog" type="radio" class="btn-group" default="0" label="FB_LIKE_ON_BLOG" description="FB_LIKE_ON_BLOG_DESC" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="fbLikePosition" type="radio" class="btn-group" default="3" label="FB_LIKE_POSITION" description="FB_LIKE_POSITION_DESC" >
+					<option value="1">AFTER_TITLE</option>
+					<option value="2">AFTER_CONTENT</option>
+					<option value="3">BOTH</option>
+				</field>
+			</fieldset>
+			<fieldset name="CODE_INSERT" addfieldpath="/plugins/system/asikart_easyset/fields">
+				<field name="inputCodeBase" type="text" default="" label="INPUT_CODE_BASE" description="INPUT_CODE_BASE_DESC" />
+				<field type="spacer" hr="true" description="" />
+				<field name="insertArticleTop" type="codemirror" filter="raw" default="" label="INCLUDE_ARTICLE_TOP" description="INCLUDE_ARTICLE_TOP_DESC" />
+				<field name="insertTitleBottom" type="codemirror" filter="raw" default="" label="INCLUDE_TITLE_BOTTOM" description="INCLUDE_TITLE_BOTTOM_DESC" />
+				<field name="insertContentTop" type="codemirror" filter="raw" default="" label="INCLUDE_CONTENT_TOP" description="INCLUDE_CONTENT_TOP_DESC" />
+				<field name="insertContentBottom" type="codemirror" filter="raw" default="" label="INCLUDE_CONTENT_BOTTOM" description="INCLUDE_CONTENT_BOTTOM_DESC" />
+				<field type="spacer" hr="true" description="" />
+				<field name="showOnBlog" type="radio" class="btn-group" default="1" label="SHOW_ON_BLOG" description="SHOW_ON_BLOG_DESC" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="showNumber" type="text" default="3" label="SHOW_NUMBER" description="SHOW_NUMBER_DESC" />
+			</fieldset>
+			<fieldset name="system">
+				<field
+					name="adminSecure"
+					type="list"
+					label="ADMIN_SECURE"
+					description="ADMIN_SECURE_DESC"
+				>
+					<option value="">JNO</option>
+					<option value="url">ADMIN_SECURE_BY_URL</option>
+					<option value="auth">ADMIN_SECURE_BY_HTTP_AUTH</option>
+					<option value="auth_user">ADMIN_SECURE_BY_HTTP_AUTH_AND_USER</option>
+				</field>
+				
+				<field
+					name="adminSecureCode"
+					type="text"
+					default="ezset"
+					size="30"
+					label="ADMIN_SECURE_CODE"
+					description="ADMIN_SECURE_CODE_DESC"
+				/>
+				
+				<field type="spacer" hr="true" description="" />
+				<field name="languageOrphan" type="radio" class="btn-group" default="0" label="LANGUAGE_ORPHAN" description="LANGUAGE_ORPHAN_DESC" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="languageOrphanPath" type="text" default="logs/language.ini" size="30" label="LANGUAGE_ORPHAN_PATH" description="LANGUAGE_ORPHAN_PATH_DESC" />
+				<field type="spacer" hr="true" description="" />
+				<field name="cacheManagerEnabled" type="radio" class="btn-group" default="0" label="CACHE_MANAGER_ENABLED" description="CACHE_MANAGER_ENABLED_DESC" >
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="cacheControlType" type="radio" class="btn-group" default="exclude" label="CACHE_CONTROL_TYPE" description="CACHE_CONTROL_TYPE_DESC" >
+					<option value="exclude">CACHE_EXCLUDE</option>
+					<option value="include">CACHE_INCLUDE</option>
+				</field>
+				<field name="CacheMenus" type="menuitem" multiple="true" size="15" label="CACHE_MENUS" description="CACHE_MENUS_DESC" />
+				<field name="CacheQueries" type="textarea" cols="45" rows="8" label="CACHE_QUERIES" description="CACHE_QUERIES_DESC" />
+			</fieldset>
+			<fieldset name="advanced" addfieldpath="/plugins/system/asikart_easyset/fields">
+				<field name="siteoverlay" type="ajax" label="SITEOVERLAY" description="SITEOVERLAY_DESC" />
+				<field name="jceoverlay" type="ajax" label="JCEOVERLAY" description="JCEOVERLAY_DESC" />
+				<field name="contentoverlay" type="ajax" label="CONTENTOVERLAY" description="CONTENTOVERLAY_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+	
+	<!--
+    <languages folder="language">
+		<language tag="zh-TW">zh-TW/zh-TW.plg_system_asikart_easyset.ini</language>
+	</languages>
+	-->
+	
+	<scriptfile>install.php</scriptfile>
+	
+	<updateservers>
+        <server type="extension" priority="1" name="Asikart Easyset">http://update.asikart.com/plugin/system/asikart_easyset.xml</server>
+        <!--<server type="collection" priority="2" name="Collection Update Site">http://example.com/collection.xml</server>-->
+    </updateservers>
+</extension>
+
+
